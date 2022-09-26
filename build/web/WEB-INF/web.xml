@@ -5,6 +5,10 @@
         <servlet-class>controller.Home</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GoogleSignInServlet</servlet-name>
+        <servlet-class>LoginWithGoogle.GoogleSignInServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Add</servlet-name>
         <servlet-class>controller.Add</servlet-class>
     </servlet>
@@ -103,6 +107,11 @@
     <servlet-mapping>
         <servlet-name>UpdateTask</servlet-name>
         <url-pattern>/updatetask</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>GoogleSignInServlet</servlet-name>
+        <url-pattern>/GoogleSignInServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

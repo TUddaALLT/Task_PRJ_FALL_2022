@@ -58,16 +58,18 @@ public class GroupCreated extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
-        HttpSession httpSession = request.getSession();
-        Account account = (Account) httpSession.getAttribute("login");
-        request.setAttribute("list", groupTaskDAO.getAllCreatedGroupTaskByUsername(account.getUsername()));
-        if (groupTaskDAO.getAllCreatedGroupTaskByUsername(account.getUsername()).isEmpty()) {
-            request.setAttribute("mess", "You do not create group");
-        } else {
-            request.setAttribute("mess", null);
-
+        try {
+            GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
+            request.setAttribute("list", groupTaskDAO.getAllCreatedGroupTaskByUsername(Utils.getAccountLogin(request).getUsername()));
+            if (groupTaskDAO.getAllCreatedGroupTaskByUsername(Utils.getAccountLogin(request).getUsername()).isEmpty()) {
+                request.setAttribute("mess", "You do not create group");
+            } else {
+                request.setAttribute("mess", null);
+            }
+        } catch (Exception e) {
+           request.getRequestDispatcher("./view/mustlogin.jsp").forward(request, response);
         }
+
         request.getRequestDispatcher("./view/groupcreated.jsp").forward(request, response);
 
     }

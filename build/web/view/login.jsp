@@ -43,10 +43,19 @@
                                                 <label class="form-label" for="form3Example4cg">Password</label>
                                             </div> 
                                             <h4 class="text-uppercase text-center mb-5" style="color: red">${requestScope.mess_er}</h4>
-                                            <div class="d-flex justify-content-center">
-                                                <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Login"/>
+                                            <div style="width: 100%" class="d-flex justify-content-center">
+                                                <input style="width: 100%" type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body" value="Login"/>
                                             </div>
-                                            <p class="text-center text-muted mt-5 mb-0"> <a href="./login" class="fw-bold text-body"><u>Forget password?</u></a></p>
+                                            <div style="width: 100% ; margin-top: 3em" class="d-flex justify-content-center">
+                                                <a style="width: 100%; " class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:9999/Tasks/login&response_type=code
+                                                   &client_id=641835329293-5dv586l39j3om29fo4ekshqed1hb2td2.apps.googleusercontent.com&approval_prompt=force">
+                                                    <span style="    margin-right: 20px;
+                                                          "><i class="fa-brands fa-google"></i> </span>
+                                                    Login with Google
+
+                                                </a>
+                                            </div>
+                                            <p class="text-center text-muted mt-5 mb-0"> <a href="./login" class="fw-bold text-body"><u style="color: #f3f3f3">Forget password?</u></a></p>
                                         </form>
 
                                     </div>

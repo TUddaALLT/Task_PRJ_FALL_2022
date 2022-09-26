@@ -61,7 +61,13 @@ public class RegisterGroup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
+        HttpSession httpSession = request.getSession();
+        Account account = (Account) httpSession.getAttribute("login");
+        if (account != null) {
+            request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("./view/mustlogin.jsp").forward(request, response);
+        }
 
     }
 
@@ -78,8 +84,7 @@ public class RegisterGroup extends HttpServlet {
             throws ServletException, IOException {
         String raw_id = request.getParameter("id");
         int idGroup;
-        HttpSession httpSession = request.getSession();
-        Account account = (Account) httpSession.getAttribute("login");
+        
         try {
             idGroup = Integer.parseInt(raw_id);
             GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
@@ -88,17 +93,17 @@ public class RegisterGroup extends HttpServlet {
                 request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
             }
             for (GroupTask groupTask : groupTaskDAO.getAllGroupTask()) {
-                if (groupTask.getGroupOfusername().equals(account.getUsername())) {
+                if (groupTask.getGroupOfusername().equals(Utils.getAccountLogin(request).getUsername())) {
                     request.setAttribute("mes", "Group is your group");
                     request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
                 }
             }
             AccountGroupDAO accountGroupDAO = new AccountGroupDAO();
-            accountGroupDAO.addAccountGroup(idGroup, account.getUsername());
+            accountGroupDAO.addAccountGroup(idGroup, Utils.getAccountLogin(request).getUsername());
             response.sendRedirect("home");
 
         } catch (Exception e) {
-             request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/registergroup.jsp").forward(request, response);
         }
     }
 

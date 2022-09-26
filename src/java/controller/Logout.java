@@ -67,7 +67,7 @@ public class Logout extends HttpServlet {
 
             }
         }
-         response.sendRedirect("login");
+        response.sendRedirect("login");
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package controller;
 
+import LoginWithGoogle.GoogleDTO;
+import LoginWithGoogle.GoogleSupport;
 import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
- 
+
 import model.Account;
 
 /**
@@ -60,7 +62,29 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./view/login.jsp").forward(request, response);
+        // login by google 
+        try {
+            String code = request.getParameter("code");
+            String accessToken = GoogleSupport.getToken(code);
+            GoogleDTO user = GoogleSupport.getUserInfo(accessToken);
+            if (user != null) {
+                HttpSession session = request.getSession();
+                AccountDAO accountDAO = new AccountDAO();
+
+                if (accountDAO.login(user.getEmail(), "loginByGoogle") != null) {
+                    Cookie usernameCookie = new Cookie("usernameCookie", user.getEmail());
+                    response.addCookie(usernameCookie);
+                    session.setAttribute("login", new Account(user.getEmail(), "loginByGoogle", accountDAO.login(user.getEmail(), "loginByGoogle").getRole()));
+                } else {
+                    accountDAO.register(new Account(user.getEmail(), "loginByGoogle", 0));
+                }
+            }
+        } catch (Exception e) {
+             
+            request.getRequestDispatcher("./view/login.jsp").forward(request, response);
+        }
+                  response.sendRedirect("home");
+
     }
 
     /**
@@ -78,14 +102,8 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
         AccountDAO accountDAO = new AccountDAO();
-        if (accountDAO.login(username, password)!=null) {
-//            Cookie ucookie = new Cookie("username", username);
-//            Cookie pcookie = new Cookie("password", password);
-//            ucookie.setMaxAge(4 * 3600);
-//            pcookie.setMaxAge(4 * 3600);
-//            response.addCookie(pcookie);
-//            response.addCookie(ucookie);
-            Cookie usernameCookie = new Cookie("usernameCookie",username);
+        if (accountDAO.login(username, password) != null) {
+            Cookie usernameCookie = new Cookie("usernameCookie", username);
             response.addCookie(usernameCookie);
             session.setAttribute("login", new Account(username, password, accountDAO.login(username, password).getRole()));
             response.sendRedirect("home");

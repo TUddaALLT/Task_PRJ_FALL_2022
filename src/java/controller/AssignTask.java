@@ -54,16 +54,12 @@ public class AssignTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-      
         String raw_id = request.getParameter("groupID");
-        
         int id ;
         try {
             id = Integer.parseInt(raw_id);
-          
             request.setAttribute("groupID", id);
             request.getRequestDispatcher("./view/addtask.jsp").forward(request, response);
-            
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

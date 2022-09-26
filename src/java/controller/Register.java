@@ -57,9 +57,9 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
-            request.getRequestDispatcher("./view/register.jsp").forward(request, response);
-        
+
+        request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+
     }
 
     /**
@@ -79,10 +79,15 @@ public class Register extends HttpServlet {
         if (password.equals(confirm_password)) {
             AccountDAO accountDAO = new AccountDAO();
             accountDAO.register(new Account(username, password, 0));
+            if (accountDAO.login(username, password) == null) {
+                request.setAttribute("mess_er", "Username is exist");
+                request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+            }
             request.setAttribute("mess", "Register successfully");
             request.getRequestDispatcher("./view/login.jsp").forward(request, response);
-
+            
         } else {
+            
             request.setAttribute("mess_er", "Password is not matched");
             request.getRequestDispatcher("./view/register.jsp").forward(request, response);
         }

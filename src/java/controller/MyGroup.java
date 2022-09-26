@@ -11,9 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Account;
-
+ 
 /**
  *
  * @author 84352
@@ -58,18 +56,19 @@ public class MyGroup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
-        HttpSession httpSession = request.getSession();
-        Account account = (Account) httpSession.getAttribute("login");
-        request.setAttribute("list", groupTaskDAO.getAllGroupTaskByUserName(account.getUsername()));
-        if (groupTaskDAO.getAllGroupTaskByUserName(account.getUsername()).isEmpty()) {
-            request.setAttribute("mess", "You do not have any group");
-        } else {
-            request.setAttribute("mess", null);
-
+        try {
+            GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
+            request.setAttribute("list", groupTaskDAO.getAllGroupTaskByUserName(Utils.getAccountLogin(request).getUsername()));
+            if (groupTaskDAO.getAllGroupTaskByUserName(Utils.getAccountLogin(request).getUsername()).isEmpty()) {
+                request.setAttribute("mess", "You do not have any group");
+            } else {
+                request.setAttribute("mess", null);
+            }
+            request.getRequestDispatcher("./view/mygroup.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("./view/mustlogin.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("./view/mygroup.jsp").forward(request, response);
-        
+
     }
 
     /**
