@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import org.apache.tomcat.util.net.Constants;
 
 public class GoogleSupport {
     public static String getToken(String code) throws ClientProtocolException, IOException {

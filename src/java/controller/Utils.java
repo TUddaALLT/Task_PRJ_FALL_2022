@@ -19,4 +19,12 @@ public class Utils {
         Account accountm = (Account) httpSession.getAttribute("login");
         return accountm;
     }
+
+    public String enCodePassword(String pass) {
+        return null;
+    }
+
+    public String deCodePassword(String pass) {
+        return null;
+    }
 }
