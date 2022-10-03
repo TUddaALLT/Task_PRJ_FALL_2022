@@ -14,7 +14,11 @@ import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import jakarta.servlet.annotation.MultipartConfig;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import model.Task;
 
 /**
@@ -23,59 +27,14 @@ import model.Task;
  */
 @MultipartConfig
 public class Add extends BaseRequiredAuthentication {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Add</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Add at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setAttribute("groupID", 0);
         request.getRequestDispatcher("./view/addtask.jsp").forward(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+    } 
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        save file anh
@@ -90,14 +49,24 @@ public class Add extends BaseRequiredAuthentication {
         //   save file anh
         String raw_groupID = request.getParameter("groupID");
         String raw_status = request.getParameter("status");
-        int   status, groupID;
+
+        String raw_time = request.getParameter("time");
+        int time;
+        int status, groupID;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date(); 
+        String time_maked = dateFormat.format(date).toString();
+      
         TaskDAO taskDAO = new TaskDAO();
-        ArrayList<Task> tasks = taskDAO.getTasks(Utils.getAccountLogin(request).getUsername());
+
         try {
             groupID = Integer.parseInt(raw_groupID);
             status = Integer.parseInt(raw_status);
+            time = Integer.parseInt(raw_time);
+
             Task t;
-            t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID);
+            t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
 
             taskDAO.addTask(t);
             request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
@@ -107,15 +76,6 @@ public class Add extends BaseRequiredAuthentication {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+ 
 
 }

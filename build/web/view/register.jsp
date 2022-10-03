@@ -33,22 +33,31 @@
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-5">
                                         <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+                                        <form action="./sendotp" method="get">
+                                            <div style="display: flex" class="form-outline mb-3">
+                                                <input placeholder="Your email" value="${sessionScope.email}" type="email" name="username" required=""  class=" form-control form-control-lg" />
+                                                <div class="d-flex justify-content-center">
+                                                    <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Send OTP"/>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <form action="./register" method="post">
+
                                             <div class="form-outline mb-3">
-                                                <input   type="email" name="username" required=""  class=" form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example3cg">Your Email</label>
+                                                <input placeholder="OTP from your mail" name="otp" type="number" required="" class=" form-control form-control-lg" />
+
                                             </div>
                                             <div class="form-outline mb-3">
-                                                <input   type="password" name="password" required=""   class=" form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example4cg">Password</label>
+                                                <input  placeholder="Password" type="password" name="password" required=""   class=" form-control form-control-lg" />
+
                                             </div>
                                             <div class="form-outline mb-3">
-                                                <input type="password" required="" name="confirm_password" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                                                <input placeholder="Repeat your password" type="password" required="" name="confirm_password" class="form-control form-control-lg" />
+
                                             </div>
                                             <h4 class="text-uppercase text-center mb-5" style="color: red">${requestScope.mess_er}</h4>
                                             <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.mess}</h4>
-
+                                            <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.connection}</h4>
                                             <div class="d-flex justify-content-center">
                                                 <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Register"/>
                                             </div>

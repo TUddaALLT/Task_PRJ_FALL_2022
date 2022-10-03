@@ -24,20 +24,17 @@
     <body>
         <jsp:include page="header.jsp" /> 
         <div class="contain_add">
-          
+
             <div class="label_add_task">
                 ADD TASK
             </div>
-           
+
             <div class="label_add_task">
                 <h2 style="color: red">${requestScope.mess}</h2>
             </div>
 
             <form action="./add" method="post" enctype="multipart/form-data">
-<!--                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">ID Task</label>        
-                    <input class="form-control" required="" name="id" type="number" placeholder="Enter Id" aria-label="default input example">
-                </div>-->
+
                 <input type="hidden"  name="groupID" value="${requestScope.groupID}">
 
                 <div class="mb-3">
@@ -57,7 +54,12 @@
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
                     <input name="describe" required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example">
                 </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>        
+                    <input class="form-control" required="" name="time" type="number" placeholder="Enter Expired (minute)" aria-label="default input example">
+                </div>
                 <input class="btn btn-success" type="submit" value="Save">
+
             </form>
         </div>
 

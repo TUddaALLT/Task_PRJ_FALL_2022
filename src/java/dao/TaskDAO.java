@@ -20,14 +20,17 @@ public class TaskDAO extends DBContext {
         String sql;
 
         sql = "INSERT INTO [dbo].[Tasks]\n"
-                + "           ( "
-                + "             [img]\n"
+                + "           ([img]\n"
                 + "           ,[describe]\n"
                 + "           ,[status]\n"
                 + "           ,[taskOfUser]\n"
-                + "           ,[groupID])\n"
+                + "           ,[groupID]\n"
+                + "           ,[time_maked]\n"
+                + "           ,[time])\n"
                 + "     VALUES\n"
                 + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
@@ -35,12 +38,15 @@ public class TaskDAO extends DBContext {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-           
+
             preparedStatement.setString(1, t.getImg());
             preparedStatement.setString(2, t.getDescribe());
             preparedStatement.setInt(3, t.getStatus());
             preparedStatement.setString(4, t.getUsername());
             preparedStatement.setInt(5, t.getGroupID());
+            preparedStatement.setString(6, t.getTime());
+            preparedStatement.setInt(7, t.getTime_exc());
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,4 +155,28 @@ public class TaskDAO extends DBContext {
         }
         return null;
     }
+
+    public void updateTask(Task task) {
+        String sql = " UPDATE [dbo].[Tasks]\n"
+                + "   SET \n"
+                + "      [describe] =?\n"
+                + "      ,[status] = ?\n"
+                + "      \n"
+                + "      ,[groupID] = ?\n"
+                + "      ,[time_maked] = ?\n"
+                + "      ,[time] = ?\n"
+                + " WHERE id=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, task.getDescribe());
+            preparedStatement.setInt(2, task.getStatus());
+            preparedStatement.setInt(3, task.getGroupID());
+            preparedStatement.setString(4, task.getTime());
+            preparedStatement.setInt(5, task.getTime_exc());
+            preparedStatement.setInt(6, task.getId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
 }

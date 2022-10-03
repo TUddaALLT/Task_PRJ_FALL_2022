@@ -55,7 +55,7 @@
 
                                                 </a>
                                             </div>
-                                            <p class="text-center text-muted mt-5 mb-0"> <a href="./login" class="fw-bold text-body"><u style="color: #f3f3f3">Forget password?</u></a></p>
+                                            <p class="text-center text-muted mt-5 mb-0"> <a href="forgotPassword" class="fw-bold text-body"><u style="color: #f3f3f3">Forget password?</u></a></p>
                                         </form>
 
                                     </div>

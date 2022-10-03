@@ -25,8 +25,11 @@
         <div class="nav" >
 
             <button class="more" onclick="open_nav()"><i class="fa-solid fa-bars"></i></button>
-         
+
             <div class="nav_l  ">
+                <div>
+                    <a href="./start">Get Started</a>
+                </div>
                 <div>
                     <a href="./home">Home</a>
                 </div>

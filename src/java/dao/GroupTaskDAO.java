@@ -18,20 +18,19 @@ public class GroupTaskDAO extends DBContext {
 
     public void addGroupTask(GroupTask groupTask) {
         String sql = "INSERT INTO [dbo].[GroupTask]\n"
-                + "           ([groupID]\n"
-                + "           ,[groupOfusername]\n"
+                + "           ([groupOfusername]\n"
                 + "           ,[groupName])\n"
                 + "     VALUES\n"
                 + "           (?\n"
-                + "           ,?\n"
                 + "           ,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, groupTask.getGroupID());
-            preparedStatement.setString(2, groupTask.getGroupOfusername());
-            preparedStatement.setString(3, groupTask.getGroupName());
+//            preparedStatement.setInt(1, groupTask.getGroupID());
+            preparedStatement.setString(1, groupTask.getGroupOfusername());
+            preparedStatement.setString(2, groupTask.getGroupName());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -46,7 +45,7 @@ public class GroupTaskDAO extends DBContext {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 groupTasks.add(new GroupTask(resultSet.getInt("groupID"),
-                         resultSet.getString("groupOfusername"), resultSet.getString("groupName")));
+                        resultSet.getString("groupOfusername"), resultSet.getString("groupName")));
             }
             return groupTasks;
         } catch (Exception e) {

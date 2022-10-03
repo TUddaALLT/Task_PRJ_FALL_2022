@@ -24,6 +24,7 @@
     <body>
 
         <jsp:include page="header.jsp" /> 
+
         <%  if (request.getAttribute("mess")!=null) {
         %>
         <div style="display: flex; align-items: center; justify-content:center ;height: 80vh">
@@ -32,16 +33,53 @@
         <%}  %>
 
         <div>
-            <div class="contain_card"> 
-                <c:forEach items="${requestScope.list}" var="l">
-                    <div class="main">
-                        <h3>Teacher: ${l.groupName}</h3>
-                        <h3>Group-ID ${l.groupID}</h3>
-                        <h3>Username of teacher: ${l.groupOfusername}</h3>
+
+            <c:forEach items="${requestScope.list}" var="l">
+                <div style="text-align: center; margin-top: 80px">
+                    <h3 style="margin: 20px 0"><h3> ${l.groupName}</h3></h3>
+                    <p>
+                        <a
+                            class="btn btn-primary"
+                            data-bs-toggle="collapse"
+                            href="#info${l.groupID}"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                            >
+                            <i class="fa-solid fa-chalkboard-user"></i> Manager
+                        </a>
+                        <button
+                            class="btn btn-primary"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#list_people${l.groupID}"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                            >
+                            <i class="fa-solid fa-user-group"></i> Members
+                        </button>
+                        <button class="btn btn-primary" type="button">
+                            <i class="fa-solid fa-person-from-portal"></i> Out group
+                        </button>
+                    </p>
+                    <div style="width: 35%; margin: 0 auto">
+                        <div class="collapse" id="list_people${l.groupID}">
+                            
+                            <h3>Group-ID ${l.groupID}</h3>
+                           
+                        </div>
+                        <div class="collapse" id="info${l.groupID}">
+                            <h3>Teacher: ${l.groupOfusername}</h3>
+                             
+                        </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+
+            </c:forEach>
+
         </div>
+
+
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

@@ -17,7 +17,7 @@ public class GroupTask {
 //           ,[groupName])
 
     private int groupID;
-    private String groupOfusername; 
+    private String groupOfusername;
     private String groupName;
 
     public GroupTask() {
@@ -29,7 +29,10 @@ public class GroupTask {
         this.groupName = groupName;
     }
 
-   
+    public GroupTask(String username, String nameGroup) {
+        this.groupOfusername = username;
+        this.groupName = nameGroup;
+    }
 
     public int getGroupID() {
         return groupID;
@@ -47,8 +50,6 @@ public class GroupTask {
         this.groupOfusername = groupOfusername;
     }
 
-    
-
     public String getGroupName() {
         return groupName;
     }
@@ -56,6 +57,5 @@ public class GroupTask {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-    
 
 }

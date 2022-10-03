@@ -34,12 +34,28 @@ public class AccountDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
+    public void changePassword(String username, String password) {
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET \n"
+                + "      [password] = ?\n"
+                + "     \n"
+                + " WHERE [username] = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
     public void upgrade(Account acc) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET role = 1 where username = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, acc.getUsername());  
+            preparedStatement.setString(1, acc.getUsername());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -100,7 +100,7 @@ public class Home extends HttpServlet {
                         + "                                        </div>\n";
             }
             if ((listTask.getGroupID() == 0) || (listTask.getUsername().equals(username))) {
-                update = "   <a href=\"./updatetask\" class=\"btn btn-primary   \">Update Task</a>";
+                update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" class=\"btn btn-primary   \">Update Task</a>";
                 delete = "<div class=\"btn btn-primary \">\n"
                         + "<i onclick=\"deleteTask('" + listTask.getId() + "')\" class=\"fa-solid fa-trash \"></i> \n"
                         + "                                        </div>\n";
