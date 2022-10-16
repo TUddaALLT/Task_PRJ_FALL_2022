@@ -31,7 +31,7 @@
                     <a href="./start">Get Started</a>
                 </div>
                 <div>
-                    <a href="./home">Home</a>
+                    <a onclick="setAlarm('${sessionScope.time}')"  href="./home">Home</a>
                 </div>
                 <div>
                     <a href="./add">Add Task</a>
@@ -57,6 +57,7 @@
                 </div>
             </div>
             <div class="nav_r">
+                
                 <div><span id="username_text">Welcome <span> </span> ${cookie['usernameCookie'].getValue()}</span></div>
                 <div class="dropdown dropdown_acc">
                     <button class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">

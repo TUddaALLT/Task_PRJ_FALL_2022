@@ -23,20 +23,47 @@
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     <div class="elfsight-app-79fd2743-aa52-4244-a15b-26490da4d24c" ></div>
 </head>
-<body>
+<body onload="setAlarm('${sessionScope.time}')">
     <jsp:include page="header.jsp" /> 
+
+    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Search    <i class="fas fa-search"></i></a>
+
     <div style="padding-top: 60px">
         <div id="ajax" class="contain_card"> 
-            <form method="get" action="./searchtask">
-                <div class="input-group">
-                    <input name="describe" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" type="submit" class="btn btn-outline-primary">search</button>
+
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="./searchtask" method="get" >
+                                <div class="input-group">
+                                    <textarea name="describe"  rows="8"  type="search" class="form-control rounded" placeholder="Search Describe" ></textarea> 
+
+                                </div>
+                                <div style="margin: 20px 0" class="input-group">
+                                    <select name="status" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                        <option selected="" value="0">Status</option>
+                                        <option value="1">On-going</option>
+                                        <option value="2">End</option>
+                                        <option value="3">Start</option>
+                                    </select>
+                                </div>
+                                <input class="btn btn-success" type="submit" value="Search">
+
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
+
+
             <c:forEach items="${requestScope.tasks}" var="t">
                 <div class="main">
                     <div class="card">
-                        <div>
+                        <div style=" height: 40vh; ">
                             <img src="<c:url value="files/${t.img}"></c:url>" class="card-img-top" style="height: 100%;  object-fit: cover"/>
                             </div>
                             <div class="card-body">
@@ -84,11 +111,27 @@
                     </div>
                 </div>
             </c:forEach>
+        </div>
+        <section class="notification">
+            <div class="container mt-5">
+                <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
 
-        </div>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">New Notification!</strong> 
+                    <span class="noti_value">
+                        xx
+                    </span>
+                </div>
+        </section>
         <div class="contain_card"> 
-            <button onclick="loadMore()" class="btn btn-primary">Load more</button>
-        </div>
+            <button onclick="notification()" class="btn btn-primary">test</button>
+        </div>  
+        <c:if test="${requestScope.search==null}">
+            <div class="contain_card"> 
+                <button onclick="loadMore()" class="btn btn-primary">Load more</button>
+            </div>  
+        </c:if>
+
     </div>
     <script
         src="https://kit.fontawesome.com/3a6c73e27c.js"

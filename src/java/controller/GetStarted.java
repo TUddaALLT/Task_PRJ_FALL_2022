@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dao.TaskDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,31 +15,16 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author 84352
  */
-public class DeleteTask extends HttpServlet {
- 
+public class GetStarted extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String raw_id = request.getParameter("id");
-        int id;
-        try {
-            id = Integer.parseInt(raw_id);
-            TaskDAO taskDAO = new TaskDAO();
-            taskDAO.addNotification("You have delete task "+ id +"",Utils.getAccountLogin(request).getUsername());
-            taskDAO.deleteTask(id);
-            response.sendRedirect("home");
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        
+        request.getRequestDispatcher("./view/start.jsp").forward(request, response);
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
-
-    
 }

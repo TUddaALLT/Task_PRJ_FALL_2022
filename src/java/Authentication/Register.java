@@ -4,9 +4,9 @@
  */
 package Authentication;
 
+import controller.Utils;
 import dao.AccountDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.IOException; 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,12 @@ public class Register extends HttpServlet {
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+        if(Utils.getAccountLogin(request)!=null){
+             request.getRequestDispatcher("./view/start.jsp").forward(request, response);
+        }else{
+             request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+        }
+       
 
     }
 

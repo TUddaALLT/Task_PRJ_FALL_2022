@@ -6,7 +6,6 @@ package controller;
 
 import dao.TaskDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,8 +15,6 @@ import java.nio.file.Paths;
 import jakarta.servlet.annotation.MultipartConfig;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import model.Task;
 
@@ -27,14 +24,15 @@ import model.Task;
  */
 @MultipartConfig
 public class Add extends BaseRequiredAuthentication {
-  
+
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setAttribute("groupID", 0);
         request.getRequestDispatcher("./view/addtask.jsp").forward(request, response);
-    } 
+    }
+
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        save file anh
@@ -50,32 +48,30 @@ public class Add extends BaseRequiredAuthentication {
         String raw_groupID = request.getParameter("groupID");
         String raw_status = request.getParameter("status");
 
-        String raw_time = request.getParameter("time");
-        int time;
+        String time = request.getParameter("alarmTime");
+
         int status, groupID;
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date(); 
+        Date date = new Date();
         String time_maked = dateFormat.format(date).toString();
-      
+
         TaskDAO taskDAO = new TaskDAO();
 
         try {
             groupID = Integer.parseInt(raw_groupID);
             status = Integer.parseInt(raw_status);
-            time = Integer.parseInt(raw_time);
-
             Task t;
             t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
 
             taskDAO.addTask(t);
-            request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
-            request.getRequestDispatcher("./view/home.jsp").forward(request, response);
-
+            taskDAO.addNotification("You have added task  ", Utils.getAccountLogin(request).getUsername());
+//            request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
+//            request.getRequestDispatcher("./view/home.jsp").forward(request, response);
+            response.sendRedirect("home");
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
     }
- 
 
 }

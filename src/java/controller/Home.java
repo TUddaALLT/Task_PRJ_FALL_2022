@@ -12,22 +12,16 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Task;
+
 /**
  *
  * @author 84352
  */
 public class Home extends HttpServlet {
 
-     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-    }
-
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,10 +35,18 @@ public class Home extends HttpServlet {
                 }
             }
         }
-        request.setAttribute("tasks", taskDAO.getTop2Tasks(username));       
+        HttpSession session = request.getSession();
+
+        ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
+        String time = "";
+        for (Task task : listTasksNoti) {
+            time = time + " " + task.getTime_exc();
+        }
+        session.setAttribute("time", time.trim());
+        request.setAttribute("tasks", taskDAO.getTop2Tasks(username));
         request.getRequestDispatcher("./view/home.jsp").forward(request, response);
     }
- 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,7 +60,14 @@ public class Home extends HttpServlet {
                 }
             }
         }
+        HttpSession session = request.getSession();
 
+        ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
+        String time = "";
+        for (Task task : listTasksNoti) {
+            time = time + " " + task.getTime_exc();
+        }
+                            session.setAttribute("time", time);
         int number;
         try {
             String raw_num = request.getParameter("ex");
@@ -70,6 +79,7 @@ public class Home extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         ArrayList<Task> listTasks = taskDAO.getTop2NextTasks(username, number);
+
         for (Task listTask : listTasks) {
             String status = "";
             if (listTask.getStatus() == 1) {
@@ -103,12 +113,12 @@ public class Home extends HttpServlet {
                 update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" class=\"btn btn-primary   \">Update Task</a>";
                 delete = "<div class=\"btn btn-primary \">\n"
                         + "<i onclick=\"deleteTask('" + listTask.getId() + "')\" class=\"fa-solid fa-trash \"></i> \n"
-                        + "                                        </div>\n";
+                        + "                                        </div>"
+                        + "\n";
             }
             out.println(" <div class=\"main\">\n"
-                    + "                        <div class=\"card\" >\n" +
- 
-                   "                            <div>"
+                    + "                        <div class=\"card\" >\n"
+                    + "                            <div style=\" height: 40vh; \">"
                     + "<img src=\"files/" + listTask.getImg() + "\" class=\"card-img-top\" style=\"height: 100%;  object-fit: cover\"/>"
                     + ""
                     + "</div>\n"
@@ -126,15 +136,5 @@ public class Home extends HttpServlet {
             );
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

@@ -6,6 +6,7 @@ package Authentication;
 
 import LoginWithGoogle.GoogleDTO;
 import LoginWithGoogle.GoogleSupport;
+import controller.Utils;
 import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,6 +30,9 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // login by google 
+        if(Utils.getAccountLogin(request)!=null){
+             request.getRequestDispatcher("./view/start.jsp").forward(request, response);
+        }
         try {
             String code = request.getParameter("code");
             String accessToken = GoogleSupport.getToken(code);

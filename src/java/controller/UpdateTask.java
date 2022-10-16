@@ -38,7 +38,6 @@ public class UpdateTask extends HttpServlet {
                 break;
             }
         }
-
         request.getRequestDispatcher("./view/updatetask.jsp").forward(request, response);
     }
 
@@ -59,8 +58,8 @@ public class UpdateTask extends HttpServlet {
         String raw_groupID = request.getParameter("groupID");
         String raw_status = request.getParameter("status");
 
-        String raw_time = request.getParameter("time");
-        int time;
+        String  time = request.getParameter("time");
+     
         int status, groupID;
         String describe = request.getParameter("describe");
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -72,7 +71,7 @@ public class UpdateTask extends HttpServlet {
         try {
             groupID = Integer.parseInt(raw_groupID);
             status = Integer.parseInt(raw_status);
-            time = Integer.parseInt(raw_time);
+          
 
             Task t;
             t = new Task(id,describe, status , groupID, time_maked, time);

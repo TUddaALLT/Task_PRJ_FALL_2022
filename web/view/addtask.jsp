@@ -47,17 +47,17 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Image</label>
-                    <input name="img" required="" class="form-control" type="file"  aria-label="default input example">
+                    <input name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
 
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
-                    <input name="describe" required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example">
+                    <textarea name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>        
-                    <input class="form-control" required="" name="time" type="number" placeholder="Enter Expired (minute)" aria-label="default input example">
-                </div>
+                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>  
+                     <input name="alarmTime" type="datetime-local">
+                    </div>
                 <input class="btn btn-success" type="submit" value="Save">
 
             </form>
@@ -67,6 +67,7 @@
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"
         ></script>
+        
     </body>
 </html>
 

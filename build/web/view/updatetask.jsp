@@ -52,11 +52,11 @@
                                 </div>-->
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
-                    <input value="${requestScope.task.describe}" name="describe" required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example">
+                    <textarea value="${requestScope.task.describe}" name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>        
-                    <input value="${requestScope.task.time_exc}" class="form-control" required="" name="time" type="number" placeholder="Enter Expired (minute)" aria-label="default input example">
+                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>  
+                    <input name="alarmTime" type="datetime-local">
                 </div>
                 <input class="btn btn-success" type="submit" value="Save">
 

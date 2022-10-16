@@ -68,6 +68,14 @@
         <servlet-name>SearchTask</servlet-name>
         <servlet-class>controller.SearchTask</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetStarted</servlet-name>
+        <servlet-class>controller.GetStarted</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Notification</servlet-name>
+        <servlet-class>controller.Notification</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -135,6 +143,14 @@
     <servlet-mapping>
         <servlet-name>SearchTask</servlet-name>
         <url-pattern>/searchtask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetStarted</servlet-name>
+        <url-pattern>/start</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Notification</servlet-name>
+        <url-pattern>/notification</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

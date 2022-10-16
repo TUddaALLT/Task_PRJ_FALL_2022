@@ -10,7 +10,8 @@ import model.Account;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Utils {
         Account accountm = (Account) httpSession.getAttribute("login");
         return accountm;
     }
+
     public static String enCodePassword(String pass) {
 
         try {
@@ -48,4 +50,20 @@ public class Utils {
         }
     }
 
+    public static void main(String[] args) {
+
+        // creating a date object with specified time.
+        Date dateOne = new Date();
+
+        System.out.println("Date initially: "
+                + dateOne);
+
+        // Sets the time
+        dateOne.setTime(1000);
+
+        // Prints the time
+        System.out.println("Date after setting"
+                + " the time: "
+                + dateOne);
+    }
 }

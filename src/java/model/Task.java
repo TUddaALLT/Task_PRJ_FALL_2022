@@ -17,12 +17,12 @@ public class Task {
     private String username;
     private int groupID;
     private String time_maked;
-    private int time_exc;
+    private String time_exc;
 
     public Task() {
     }
 
-    public Task(String img, String describe, int status, String username, int groupID, String time, int time_exc) {
+    public Task(String img, String describe, int status, String username, int groupID, String time, String time_exc) {
 
         this.img = img;
         this.describe = describe;
@@ -33,7 +33,7 @@ public class Task {
         this.time_exc = time_exc;
     }
 
-    public Task(int id ,String describe, int status , int groupID, String time, int time_exc) {
+    public Task(int id ,String describe, int status , int groupID, String time, String time_exc) {
         this.id = id;
         this.describe = describe;
         this.status = status;
@@ -51,11 +51,11 @@ public class Task {
         this.time_maked = time;
     }
 
-    public int getTime_exc() {
+    public String getTime_exc() {
         return time_exc;
     }
 
-    public void setTime_exc(int time_exc) {
+    public void setTime_exc(String time_exc) {
         this.time_exc = time_exc;
     }
 
@@ -67,14 +67,17 @@ public class Task {
         this.username = username;
     }
 
-    public Task(int id, String img, String describe, int status, String username, int groupID) {
+    public Task(int id, String img, String describe, int status, String username, int groupID, String time, String time_exc) {
         this.id = id;
         this.img = img;
         this.describe = describe;
         this.status = status;
         this.username = username;
         this.groupID = groupID;
+        this.time_maked = time;
+        this.time_exc = time_exc;
     }
+    
 
     public Task(String img, String describe, int status, String username, int groupID) {
         this.img = img;
@@ -84,6 +87,7 @@ public class Task {
         this.groupID = groupID;
 
     }
+    
 
     public int getGroupID() {
         return groupID;
