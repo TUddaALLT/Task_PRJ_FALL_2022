@@ -17,13 +17,11 @@
         <jsp:include page="header.jsp" /> 
 
         <div style="display: flex; justify-content: center;align-items: center ;height: 90vh">
-            <div class="loader" >
-                <form action="./upgrade" method="post">
-                    <input type="submit" value="Pay to upgrade">
-                </form>
-            </div>
+            <form action="./upgrade" method="post">
+                <input class="btn btn-success" type="submit" value="Pay to upgrade">
+            </form>
         </div>
         <script src="./js/main.js">
-        </script>
+        </script>     <jsp:include page="footer.jsp" /> 
     </body>
 </html>

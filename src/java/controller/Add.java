@@ -4,6 +4,8 @@
  */
 package controller;
 
+import dao.AccountGroupDAO;
+import dao.NotificationDAO;
 import dao.TaskDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -63,9 +65,19 @@ public class Add extends BaseRequiredAuthentication {
             status = Integer.parseInt(raw_status);
             Task t;
             t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
-
             taskDAO.addTask(t);
-            taskDAO.addNotification("You have added task  ", Utils.getAccountLogin(request).getUsername());
+            model.Notification notification = new model.Notification("You have added task " + describe,
+                    Utils.getAccountLogin(request).getUsername(), "You Add Task", time_maked);
+            NotificationDAO notificationDAO = new NotificationDAO();
+            notificationDAO.addNotification(notification);
+            AccountGroupDAO accountGroupDAO = new AccountGroupDAO();
+            String st = accountGroupDAO.getAccGr(groupID);
+            String usernames[] = st.split(" ");
+            for (String username : usernames) {
+                model.Notification noti = new model.Notification("You have a task " + describe,
+                        username, "Task From " + Utils.getAccountLogin(request).getUsername(), time_maked);
+                notificationDAO.addNotification(noti);
+            }
 //            request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
 //            request.getRequestDispatcher("./view/home.jsp").forward(request, response);
             response.sendRedirect("home");

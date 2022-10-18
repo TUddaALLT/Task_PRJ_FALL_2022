@@ -11,14 +11,19 @@ import java.util.ArrayList;
  * @author 84352
  */
 public class GroupTask {
-//    ([groupID]
-//           ,[groupOfusername]
-//           ,[usernameJoin]
-//           ,[groupName])
 
     private int groupID;
     private String groupOfusername;
     private String groupName;
+    private String usernames[];
+
+    public String[] getUsernames() {
+        return usernames;
+    }
+
+    public void setUsernames(String[] usernames) {
+        this.usernames = usernames;
+    }
 
     public GroupTask() {
     }

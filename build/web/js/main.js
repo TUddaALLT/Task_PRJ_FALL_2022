@@ -1,18 +1,41 @@
 
-function deleteTask(id) {
-    if (confirm("sure ?")) {
-        window.location = "./deletetask?id=" + id;
-    }
+function deleteTask(id, describe) {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    window.location = "./deletetask?id=" + id + "&describe=" + describe;
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+
 
 }
-window.onload = function ()
-{
-    setTimeout(notification, 3000);
-};
+
+setInterval(notification, 1000);
 function updateTask(id) {
 
-    window.location = "./updatetask?id=" + id;
+    swal({
+        title: "Are you sure update this task?",
+        icon: "success",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
+                if (willDelete) {
 
+                    window.location = "./updatetask?id=" + id;
+                } else {
+                    swal("Your task is not updated");
+                }
+            });
 }
 let y = 1;
 function open_nav() {
@@ -29,7 +52,7 @@ function  do_assigntask(groupID) {
 
     window.location = "./assigntask?groupID=" + groupID;
 }
-let x = document.getElementById("username_text").offsetWidth + 150;
+let x = document.getElementById("username_text").offsetWidth + 180;
 document.querySelector(".nav_r").style.width = `${x}px`;
 
 function notification() {
@@ -42,17 +65,18 @@ function notification() {
         },
         success: function (data) {
             var noti_value = document.querySelector(".noti_value");
-            noti_value.innerHTML += data;
+
             let result = data.localeCompare("error\r\n"); // 0 neu loi 
             if (result !== 0) {
+                noti_value.innerHTML += data;
                 var notification = document.querySelector(".notification");
                 notification.style.display = "block";
                 const myTimeout = setTimeout(function () {
                     notification.style.display = "none";
                 }, 5000);
-             
+
             }
-            
+
         },
         error: function (xhr) {
             //Do Something to handle error
@@ -60,11 +84,32 @@ function notification() {
     });
 
 }
+let n = 1;
+function getNotification() {
+    if (n === 1) {
+        document.querySelector(".open_noti").style.display = "block";
+        n = 0;
+    } else {
+        document.querySelector(".open_noti").style.display = "none";
+        n = 1;
+    }
+    $.ajax({
+        url: "/Tasks/notification",
+        type: "post",
+        data: {
+//            ex: ;
+        },
+        success: function (data) {
+            document.querySelector(".noti_list").innerHTML =  data;
+        },
+        error: function (xhr) {
+            //Do Something to handle error
+        }
+    });
 
-
+}
 function loadMore() {
     let amount = document.getElementsByClassName("card").length;
-
     $.ajax({
         url: "/Tasks/home",
         type: "post",
@@ -79,7 +124,6 @@ function loadMore() {
             //Do Something to handle error
         }
     });
-
 }
 
 
@@ -102,7 +146,19 @@ function setAlarm(time) {
     time_ex.sort();
     console.log(time_ex);
     for (const timeout of time_ex) {
-        setTimeout(() => alert("Task is expired " + timeout), timeout);
+        setTimeout(() => swal({
+                title: "Task is expired " + time,
+                text: "You clicked the button!",
+                icon: "error",
+                button: "Ok "
+            }), timeout);
     }
 }
-
+//preview img
+var loadFile = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+        URL.revokeObjectURL(output.src) // free memory
+    }
+};

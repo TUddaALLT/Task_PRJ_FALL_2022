@@ -47,7 +47,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Image</label>
-                    <input name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+                    <input onchange="loadFile(event)" name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+                    <img style="width:40vw; margin-top:10px;border-radius: 10px" id="output"/>
 
                 </div>
                 <div class="mb-3">
@@ -62,7 +63,7 @@
 
             </form>
         </div>
-
+     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

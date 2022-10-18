@@ -199,11 +199,11 @@ public class TaskDAO extends DBContext {
         String sql = " UPDATE [dbo].[Tasks]\n"
                 + "   SET \n"
                 + "      [describe] =?\n"
-                + "      ,[status] = ?\n"
-                + "      \n"
+                + "      ,[status] = ? \n"
                 + "      ,[groupID] = ?\n"
                 + "      ,[time_maked] = ?\n"
-                + "      ,[time] = ?\n"
+                + "      ,[time] = ? "
+                + "      , [img] = ? \n"
                 + " WHERE id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -212,7 +212,9 @@ public class TaskDAO extends DBContext {
             preparedStatement.setInt(3, task.getGroupID());
             preparedStatement.setString(4, task.getTime());
             preparedStatement.setString(5, task.getTime_exc());
-            preparedStatement.setInt(6, task.getId());
+             preparedStatement.setString(6, task.getImg());
+            preparedStatement.setInt(7, task.getId());
+           
             preparedStatement.executeUpdate();
         } catch (Exception e) {
         }
@@ -282,26 +284,5 @@ public class TaskDAO extends DBContext {
         return null;
     }
 
-    public void addNotification(String noti, String username) {
-
-        String sql;
-
-        sql = "INSERT INTO [dbo].[Notification]\n"
-                + "           ([notification]\n"
-                + "           ,[username])\n"
-                + "     VALUES\n"
-                + "           (?\n"
-                + "           ,?)";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, noti);
-            preparedStatement.setString(2, username);
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
 }

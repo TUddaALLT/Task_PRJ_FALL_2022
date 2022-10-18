@@ -33,7 +33,7 @@
                 <h2 style="color: red">${requestScope.mess}</h2>
             </div>
 
-            <form action="./updatetask" method="post">
+            <form action="./updatetask" method="post" enctype="multipart/form-data">
 
                 <input type="hidden"  name="groupID" value="${requestScope.task.groupID}">
                 <input type="hidden"  name="id" value="${requestScope.task.id}">
@@ -45,11 +45,11 @@
                         <option value="3">Start</option>
                     </select>
                 </div>
-                <!--                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Image</label>
-                                    <input value="${requestScope.task.img}" name="img"  class="form-control" type="file"  aria-label="default input example">
-                
-                                </div>-->
+                 <div class="mb-3">
+                    <label for="formFile" class="form-label">Image</label>
+                    <input name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
                     <textarea value="${requestScope.task.describe}" name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
@@ -62,7 +62,7 @@
 
             </form>
         </div>
-
+     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

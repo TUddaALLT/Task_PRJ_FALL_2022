@@ -4,7 +4,9 @@
  */
 package dao;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -27,5 +29,24 @@ public class AccountGroupDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public  String getAccGr(int idGroup) {
+        String sql = "SELECT [username]\n"
+                + "      ,[groupID]\n"
+                + "  FROM [dbo].[AccountGroup] where [groupID] = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, idGroup);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String username = "";
+            while (resultSet.next()) {
+                username += resultSet.getString("username")+" ";
+            }
+            return username;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

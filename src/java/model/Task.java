@@ -33,7 +33,7 @@ public class Task {
         this.time_exc = time_exc;
     }
 
-    public Task(int id ,String describe, int status , int groupID, String time, String time_exc) {
+    public Task(int id ,String describe, int status , int groupID, String time, String time_exc,String img) {
         this.id = id;
         this.describe = describe;
         this.status = status;
@@ -41,6 +41,7 @@ public class Task {
         this.groupID = groupID;
         this.time_maked = time;
         this.time_exc = time_exc;
+         this.img = img;
     }
 
     public String getTime() {

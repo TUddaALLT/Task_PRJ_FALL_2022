@@ -122,12 +122,15 @@
                     <img width="100%"  src="https://images.ctfassets.net/rz1oowkt5gyp/7pYWhpQ3vnntxoShaImNws/24181e476913df1dacc1690518ee54e7/trello_1_vi.png?w=1200&fm=webp" alt="alt"/>
                 </div>
             </div>
+            
         </div>
-
+ <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"
         ></script>
+        
+        
     </body>
 </html>
 

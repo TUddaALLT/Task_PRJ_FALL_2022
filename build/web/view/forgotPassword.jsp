@@ -68,6 +68,7 @@
                     </div>
                 </div>
             </section></div>
+             <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

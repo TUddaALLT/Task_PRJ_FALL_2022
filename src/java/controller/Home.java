@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -20,10 +19,10 @@ import model.Task;
  *
  * @author 84352
  */
-public class Home extends HttpServlet {
+public class Home extends BaseRequiredAuthentication {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         TaskDAO taskDAO = new TaskDAO();
         String username = "";
@@ -42,13 +41,15 @@ public class Home extends HttpServlet {
         for (Task task : listTasksNoti) {
             time = time + " " + task.getTime_exc();
         }
+
         session.setAttribute("time", time.trim());
         request.setAttribute("tasks", taskDAO.getTop2Tasks(username));
         request.getRequestDispatcher("./view/home.jsp").forward(request, response);
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         TaskDAO taskDAO = new TaskDAO();
         String username = "";
@@ -67,7 +68,7 @@ public class Home extends HttpServlet {
         for (Task task : listTasksNoti) {
             time = time + " " + task.getTime_exc();
         }
-                            session.setAttribute("time", time);
+        session.setAttribute("time", time);
         int number;
         try {
             String raw_num = request.getParameter("ex");

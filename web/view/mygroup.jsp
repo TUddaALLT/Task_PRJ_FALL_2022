@@ -31,10 +31,8 @@
             <h1>${requestScope.mess}</h1>
         </div>
         <%}  %>
-
-        <div>
-
-            <c:forEach items="${requestScope.list}" var="l">
+        <div style="margin-bottom: 90vh">
+            <c:forEach items="${requestScope.list}" var="l" varStatus="loop">
                 <div style="text-align: center; margin-top: 80px">
                     <h3 style="margin: 20px 0"><h3> ${l.groupName}</h3></h3>
                     <p>
@@ -64,22 +62,24 @@
                     </p>
                     <div style="width: 35%; margin: 0 auto">
                         <div class="collapse" id="list_people${l.groupID}">
-                            
-                            <h3>Group-ID ${l.groupID}</h3>
-                           
+
+                            <h3>Group-ID ${l.groupID} </h3>
+                            <c:forEach items="${l.usernames}" var="la">
+                                <p>
+                                    ${la}
+                                </p> 
+                            </c:forEach>
+                            <!--get list--> 
+
                         </div>
                         <div class="collapse" id="info${l.groupID}">
                             <h3>Teacher: ${l.groupOfusername}</h3>
-                             
+
                         </div>
                     </div>
                 </div>
-
             </c:forEach>
-
-        </div>
-
-
+        </div>     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

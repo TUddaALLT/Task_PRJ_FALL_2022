@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="./css/main.css" />
     </head>
     <body>
-        <div class="nav" >
+        <div  class="nav" >
 
             <button class="more" onclick="open_nav()"><i class="fa-solid fa-bars"></i></button>
 
@@ -35,9 +35,6 @@
                 </div>
                 <div>
                     <a href="./add">Add Task</a>
-                </div>
-                <div>
-                    <a href="./upgrade" >Upgrade</a>
                 </div>
 
                 <div class="dropdown dropdown_group">
@@ -53,11 +50,38 @@
                                 <a href="./creategroup" >Create Group</a></button></li>
                         <li><button class="dropdown-item" type="button">
                                 <a href="./registergroup">Register Group</a></button></li> 
+                        <li><button class="dropdown-item" type="button">
+                                <a href="./upgrade">Upgrade</a></button></li> 
+
                     </ul>
                 </div>
+
+                <div onclick="getNotification()" class="my-btn">
+                    <div class="my-btn-border"></div>
+                    <i class="fas fa-bell btn-bell"></i>
+                </div>
+                <div style="
+                     position: absolute;
+                     margin-top: 90vh;
+                     margin-left: 72vw;
+                     border-radius: 10px;
+                     background: white;
+                     width: 25vw;
+                     border: solid 1px gray;
+                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                     height: 80vh;
+                     overflow: auto;
+                     display: none;
+                     "  class="open_noti">
+                    <div class="list-group noti_list"> 
+
+                    </div>
+
+
+                </div>
             </div>
-            <div class="nav_r">
-                
+            <div  class="nav_r">
+
                 <div><span id="username_text">Welcome <span> </span> ${cookie['usernameCookie'].getValue()}</span></div>
                 <div class="dropdown dropdown_acc">
                     <button class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,7 +104,7 @@
 
 
         </div>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

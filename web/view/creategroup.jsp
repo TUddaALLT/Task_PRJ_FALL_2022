@@ -24,7 +24,7 @@
     </head>
     <body>
         <jsp:include page="header.jsp" /> 
-        <div class="contain_add">
+        <div style="margin-bottom: 90vh"  class="contain_add">
             <%  if(request.getAttribute("messToUpgrade")==null){ %>
             <div class="label_add_task">
                 Create Group
@@ -58,7 +58,7 @@
 
             <% } %>
         </div>
-
+     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

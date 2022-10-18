@@ -31,7 +31,7 @@
         </div>
         <%}  %>
 
-        <div>
+        <div style="margin-bottom: 90vh">
             <div class="contain_card"> 
 
                 <c:forEach items="${requestScope.list}" var="l">
@@ -47,7 +47,7 @@
 
 
             </div>
-        </div>
+        </div>     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

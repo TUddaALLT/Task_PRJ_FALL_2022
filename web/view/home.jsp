@@ -21,12 +21,22 @@
             /> 
         <link rel="stylesheet" href="./css/main.css" />
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <div class="elfsight-app-79fd2743-aa52-4244-a15b-26490da4d24c" ></div>
 </head>
 <body onload="setAlarm('${sessionScope.time}')">
     <jsp:include page="header.jsp" /> 
+    <c:if test="${requestScope.tasks.size()!=0}" >
+        <div style="    margin-top: 90px;
+             display: flex;
+             justify-content: center;
+             position: fixed;
+             margin-left: 20vw;">
+            <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Search    <i class="fas fa-search"></i></a>
+        </div>
+    </c:if>
 
-    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Search    <i class="fas fa-search"></i></a>
 
     <div style="padding-top: 60px">
         <div id="ajax" class="contain_card"> 
@@ -58,7 +68,6 @@
                     </div>
                 </div>
             </div>
-
 
             <c:forEach items="${requestScope.tasks}" var="t">
                 <div class="main">
@@ -103,7 +112,7 @@
                                 </c:if>   
                                 <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
                                     <div class="btn btn-primary">
-                                        <i onclick="deleteTask('${t.id}')" class="fa-solid fa-trash "></i> 
+                                        <i onclick="deleteTask('${t.id}', '${t.describe}')" class="fa-solid fa-trash "></i> 
                                     </div>
                                 </c:if> 
                             </div>
@@ -111,6 +120,14 @@
                     </div>
                 </div>
             </c:forEach>
+            
+       
+            <c:if test="${requestScope.tasks.size()==0}" >
+                <h1 style="color: #00040a">
+                    You have not created task
+                </h1>
+            </c:if>
+
         </div>
         <section class="notification">
             <div class="container mt-5">
@@ -119,20 +136,18 @@
                     <i class="start-icon far fa-check-circle faa-tada animated"></i>
                     <strong class="font__weight-semibold">New Notification!</strong> 
                     <span class="noti_value">
-                        xx
+                        XX
                     </span>
                 </div>
-        </section>
-        <div class="contain_card"> 
-            <button onclick="notification()" class="btn btn-primary">test</button>
-        </div>  
-        <c:if test="${requestScope.search==null}">
+        </section> 
+        <c:if test="${requestScope.tasks.size()!=0}" >
             <div class="contain_card"> 
                 <button onclick="loadMore()" class="btn btn-primary">Load more</button>
             </div>  
         </c:if>
-
+        
     </div>
+     <jsp:include page="footer.jsp" /> 
     <script
         src="https://kit.fontawesome.com/3a6c73e27c.js"
         crossorigin="anonymous"
