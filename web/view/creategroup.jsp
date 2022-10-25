@@ -24,7 +24,7 @@
     </head>
     <body>
         <jsp:include page="header.jsp" /> 
-        <div style="margin-bottom: 90vh"  class="contain_add">
+        <div style="width: 50vw ;margin: auto;margin-bottom: 90vh"  class="contain_add">
             <%  if(request.getAttribute("messToUpgrade")==null){ %>
             <div class="label_add_task">
                 Create Group

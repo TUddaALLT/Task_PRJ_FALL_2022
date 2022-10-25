@@ -52,6 +52,22 @@ function  do_assigntask(groupID) {
 
     window.location = "./assigntask?groupID=" + groupID;
 }
+function  delete_group(id) {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this group !",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location = "./deletegroup?id=" + id ;
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+}
 let x = document.getElementById("username_text").offsetWidth + 180;
 document.querySelector(".nav_r").style.width = `${x}px`;
 
@@ -100,7 +116,7 @@ function getNotification() {
 //            ex: ;
         },
         success: function (data) {
-            document.querySelector(".noti_list").innerHTML =  data;
+            document.querySelector(".noti_list").innerHTML = data;
         },
         error: function (xhr) {
             //Do Something to handle error

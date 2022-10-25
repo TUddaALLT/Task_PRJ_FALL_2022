@@ -4,9 +4,9 @@
  */
 package dao;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -31,7 +31,7 @@ public class AccountGroupDAO extends DBContext {
         }
     }
 
-    public  String getAccGr(int idGroup) {
+    public String getAccGr(int idGroup) {
         String sql = "SELECT [username]\n"
                 + "      ,[groupID]\n"
                 + "  FROM [dbo].[AccountGroup] where [groupID] = ?";
@@ -41,7 +41,7 @@ public class AccountGroupDAO extends DBContext {
             ResultSet resultSet = preparedStatement.executeQuery();
             String username = "";
             while (resultSet.next()) {
-                username += resultSet.getString("username")+" ";
+                username += resultSet.getString("username") + " ";
             }
             return username;
         } catch (Exception e) {
@@ -49,4 +49,17 @@ public class AccountGroupDAO extends DBContext {
         }
         return null;
     }
+
+    public void deleteById(int id) {
+        String sql = "DELETE FROM [dbo].[AccountGroup]\n"
+                + "      WHERE groupID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

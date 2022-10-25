@@ -13,19 +13,20 @@ import java.sql.SQLException;
  * @author 84352
  */
 public class DBContext {
-
     protected Connection connection;
-
-    public DBContext() {
+    public DBContext()
+    {
         try {
             // Edit URL , username, password to authenticate with your MS SQL Server
-            String url = "jdbc:postgresql://ec2-44-209-24-62.compute-1.amazonaws.com:5432/dd9i0llb4nvpd1";
-            String username = "weptrytqkktmnz";
-            String password = "5432";
-            Class.forName("org.postgresql.Driver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=PRJ_Task";
+            String username = "sa";
+            String password = "123";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }
     }
 }
+
+

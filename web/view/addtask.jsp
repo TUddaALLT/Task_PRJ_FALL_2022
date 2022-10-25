@@ -56,9 +56,9 @@
                     <textarea name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Time Expired</label>  
+                    <label for="exampleFormControlInput1" class="form-label">Time Expired    </label>  
                      <input name="alarmTime" type="datetime-local">
-                    </div>
+                    </div> 
                 <input class="btn btn-success" type="submit" value="Save">
 
             </form>

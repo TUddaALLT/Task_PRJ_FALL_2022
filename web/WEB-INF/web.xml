@@ -76,6 +76,10 @@
         <servlet-name>Notification</servlet-name>
         <servlet-class>controller.Notification</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteGroup</servlet-name>
+        <servlet-class>controller.DeleteGroup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>Notification</servlet-name>
         <url-pattern>/notification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteGroup</servlet-name>
+        <url-pattern>/deletegroup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

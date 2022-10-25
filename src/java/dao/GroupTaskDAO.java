@@ -115,4 +115,17 @@ public class GroupTaskDAO extends DBContext {
         }
         return null;
     }
+
+    public void deleteGroupTask(int id) {
+        String sql = "DELETE FROM [dbo].[GroupTask]\n"
+                + "      WHERE GroupID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -31,22 +31,42 @@
         </div>
         <%}  %>
 
-        <div style="margin-bottom: 90vh">
+        <div style="margin-bottom: 90vh ; padding-top: 10vh">
             <div class="contain_card"> 
 
                 <c:forEach items="${requestScope.list}" var="l">
                     <div class="main">
-                        <h3>Teacher: ${l.groupName}</h3>
-                        <h3>Group-ID ${l.groupID}</h3>
-                        <h3>Username of teacher: ${l.groupOfusername}</h3>
-                        <div class="btn btn-success" onclick="do_assigntask('${l.groupID}')">Assign Task</div>
+                        <div class="card">
+                            <div class="card-body"> 
+                                <h3>Group Name: ${l.groupName}</h3>  <br>
+                                <h3>Group-ID: ${l.groupID}</h3> <br>
+                                <div style="display: flex ; justify-content: space-between">
+                                    <div class="btn btn-primary" onclick="do_assigntask('${l.groupID}')">Assign Task</div>
 
+                                    <div class="btn btn-danger">
+                                        <i onclick="delete_group('${l.groupID}')" class="fa-solid fa-trash "></i> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </c:forEach>
 
 
 
             </div>
+
+            <section class="notification">
+                <div class="container mt-5">
+                    <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+
+                        <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                        <strong class="font__weight-semibold">New Notification!</strong> 
+                        <span class="noti_value">
+                            XX
+                        </span>
+                    </div>
+            </section> 
         </div>     <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
@@ -55,6 +75,9 @@
         <script
             src="./js/main.js"
         ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!--<script src="https://apps.elfsight.com/p/platform.js" defer></script>-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>
 

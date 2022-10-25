@@ -212,9 +212,9 @@ public class TaskDAO extends DBContext {
             preparedStatement.setInt(3, task.getGroupID());
             preparedStatement.setString(4, task.getTime());
             preparedStatement.setString(5, task.getTime_exc());
-             preparedStatement.setString(6, task.getImg());
+            preparedStatement.setString(6, task.getImg());
             preparedStatement.setInt(7, task.getId());
-           
+
             preparedStatement.executeUpdate();
         } catch (Exception e) {
         }
@@ -222,7 +222,7 @@ public class TaskDAO extends DBContext {
 
     public ArrayList<Task> searchTasks(String describe, int status, String username) {
         ArrayList<Task> tasks = new ArrayList<>();
-        String sql = "SELECT			[id]\n"
+        String sql = "SELECT       [id]\n"
                 + "               ,[img] \n"
                 + "               ,[describe] \n"
                 + "               ,[status] \n"
@@ -284,5 +284,16 @@ public class TaskDAO extends DBContext {
         return null;
     }
 
-    
+    public void deleteTaskById(int id) {
+        String sql = "DELETE FROM [dbo].[Tasks]\n"
+                + "      WHERE groupID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

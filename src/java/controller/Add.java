@@ -66,15 +66,23 @@ public class Add extends BaseRequiredAuthentication {
             Task t;
             t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
             taskDAO.addTask(t);
-            model.Notification notification = new model.Notification("You have added task " + describe,
+            // notification
+            String des = "";
+            if (describe.length() > 31) {
+                des = describe.substring(0, 30) + " ...";
+            } else {
+                des = describe;
+            }
+            model.Notification notification = new model.Notification("You have added task " + des,
                     Utils.getAccountLogin(request).getUsername(), "You Add Task", time_maked);
             NotificationDAO notificationDAO = new NotificationDAO();
             notificationDAO.addNotification(notification);
+            //
             AccountGroupDAO accountGroupDAO = new AccountGroupDAO();
             String st = accountGroupDAO.getAccGr(groupID);
             String usernames[] = st.split(" ");
-            for (String username : usernames) {
-                model.Notification noti = new model.Notification("You have a task " + describe,
+            for (String username : usernames) { 
+                model.Notification noti = new model.Notification("You have a task " + des,
                         username, "Task From " + Utils.getAccountLogin(request).getUsername(), time_maked);
                 notificationDAO.addNotification(noti);
             }

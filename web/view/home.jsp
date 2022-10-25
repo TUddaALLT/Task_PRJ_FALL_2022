@@ -20,8 +20,7 @@
             crossorigin="anonymous"
             /> 
         <link rel="stylesheet" href="./css/main.css" />
-        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <div class="elfsight-app-79fd2743-aa52-4244-a15b-26490da4d24c" ></div>
 </head>
@@ -38,7 +37,7 @@
     </c:if>
 
 
-    <div style="padding-top: 60px">
+    <div style="padding: 60px 0 75vh 0">
         <div id="ajax" class="contain_card"> 
 
             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -111,7 +110,7 @@
                                     </div>
                                 </c:if>   
                                 <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
-                                    <div class="btn btn-primary">
+                                    <div class="btn btn-danger">
                                         <i onclick="deleteTask('${t.id}', '${t.describe}')" class="fa-solid fa-trash "></i> 
                                     </div>
                                 </c:if> 
@@ -120,8 +119,8 @@
                     </div>
                 </div>
             </c:forEach>
-            
-       
+
+
             <c:if test="${requestScope.tasks.size()==0}" >
                 <h1 style="color: #00040a">
                     You have not created task
@@ -131,7 +130,7 @@
         </div>
         <section class="notification">
             <div class="container mt-5">
-                <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__btn-primary brk-library-rendered rendered show">
 
                     <i class="start-icon far fa-check-circle faa-tada animated"></i>
                     <strong class="font__weight-semibold">New Notification!</strong> 
@@ -145,9 +144,9 @@
                 <button onclick="loadMore()" class="btn btn-primary">Load more</button>
             </div>  
         </c:if>
-        
+
     </div>
-     <jsp:include page="footer.jsp" /> 
+    <jsp:include page="footer.jsp" /> 
     <script
         src="https://kit.fontawesome.com/3a6c73e27c.js"
         crossorigin="anonymous"
@@ -156,6 +155,8 @@
     <script
         src="./js/main.js"
     ></script>
+    <!--<script src="https://apps.elfsight.com/p/platform.js" defer></script>-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>
 

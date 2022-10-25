@@ -8,7 +8,7 @@ import LoginWithGoogle.GoogleDTO;
 import LoginWithGoogle.GoogleSupport;
 import controller.Utils;
 import dao.AccountDAO;
-import java.io.IOException; 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -24,13 +24,12 @@ import model.Account;
  */
 public class Login extends HttpServlet {
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // login by google 
-        if(Utils.getAccountLogin(request)!=null){
-             request.getRequestDispatcher("./view/start.jsp").forward(request, response);
+        if (Utils.getAccountLogin(request) != null) {
+            request.getRequestDispatcher("./view/start.jsp").forward(request, response);
         }
         try {
             String code = request.getParameter("code");
@@ -39,7 +38,6 @@ public class Login extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 AccountDAO accountDAO = new AccountDAO();
-
                 if (accountDAO.login(user.getEmail(), "loginByGoogle") != null) {
                     Cookie usernameCookie = new Cookie("usernameCookie", user.getEmail());
                     response.addCookie(usernameCookie);
@@ -52,19 +50,18 @@ public class Login extends HttpServlet {
                     }
                 }
             }
-        } catch (Exception e) {
-             
+        } catch (ServletException | IOException e) {
             request.getRequestDispatcher("./view/login.jsp").forward(request, response);
         }
-                  response.sendRedirect("home");
-
+        response.sendRedirect("home");
     }
 
-  
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String raw_password = request.getParameter("password");
+        String password = Utils.enCodePassword(raw_password);
         HttpSession session = request.getSession();
         AccountDAO accountDAO = new AccountDAO();
         if (accountDAO.login(username, password) != null) {
@@ -74,11 +71,9 @@ public class Login extends HttpServlet {
             response.sendRedirect("home");
         } else {
             session.setAttribute("login", null);
-            request.setAttribute("mess_er", "Login failed !!");
+            request.setAttribute("mess_er", "Username or Password is wrong!!");
             request.getRequestDispatcher("./view/login.jsp").forward(request, response);
         }
-
     }
 
-   
 }

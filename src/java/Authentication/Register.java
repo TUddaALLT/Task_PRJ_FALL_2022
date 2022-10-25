@@ -6,7 +6,7 @@ package Authentication;
 
 import controller.Utils;
 import dao.AccountDAO;
-import java.io.IOException; 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,19 +19,17 @@ import model.Account;
  * @author 84352
  */
 public class Register extends HttpServlet {
- 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(Utils.getAccountLogin(request)!=null){
-             request.getRequestDispatcher("./view/start.jsp").forward(request, response);
-        }else{
-             request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+        if (Utils.getAccountLogin(request) != null) {
+            request.getRequestDispatcher("./view/start.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("./view/register.jsp").forward(request, response);
         }
-       
 
     }
 
-   
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -39,13 +37,13 @@ public class Register extends HttpServlet {
         HttpSession session = request.getSession();
         int otp = (int) session.getAttribute("otp");
         if (value == otp) {
-            String username = (String)session.getAttribute("email");
+            String username = (String) session.getAttribute("email");
             String password = request.getParameter("password");
             String confirm_password = request.getParameter("confirm_password");
             if (password.equals(confirm_password)) {
                 AccountDAO accountDAO = new AccountDAO();
-                accountDAO.register(new Account(username, password, 0));
-                if (accountDAO.login(username, password) == null) {
+                accountDAO.register(new Account(username, Utils.enCodePassword(password), 0));
+                if (accountDAO.login(username, Utils.enCodePassword(password)) == null) {
                     request.setAttribute("mess_er", "Username is exist");
                     request.getRequestDispatcher("./view/register.jsp").forward(request, response);
                 }
@@ -58,13 +56,11 @@ public class Register extends HttpServlet {
                 request.getRequestDispatcher("./view/register.jsp").forward(request, response);
             }
 
-        }else{
-              request.setAttribute("mess_er", "OTP is false");
-                request.getRequestDispatcher("./view/register.jsp").forward(request, response);
+        } else {
+            request.setAttribute("mess_er", "OTP is false");
+            request.getRequestDispatcher("./view/register.jsp").forward(request, response);
         }
 
     }
-
-     
 
 }
