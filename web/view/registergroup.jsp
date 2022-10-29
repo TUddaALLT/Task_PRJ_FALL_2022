@@ -18,7 +18,12 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" href="./css/main.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+        <link
+            <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./js/main.js" />
     </head>
     <body>
@@ -28,28 +33,28 @@
                 Register Group
             </div>
             <div class="label_add_task">
-               <h2 style="color: red">${requestScope.mess}</h2>
-                              <h2 style="color: red">${requestScope.mes}</h2>
-
+                <h2 style="color: red">${requestScope.mess}</h2>
+                <h2 style="color: red">${requestScope.mes}</h2>
             </div>
-           
+
             <div style="width: 30vw ;margin: auto">
                 <form action="./registergroup" method="post">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">ID Group Task</label>        
-                    <input class="form-control" required="" name="id" type="number" placeholder="Enter Id Group" aria-label="default input example">
-                </div>
-                   
-                <div><input class="btn btn-success" type="submit" value="Register"></div>
-                
-            </form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">ID Group Task</label>        
+                        <input class="form-control" required="" name="id" type="number" placeholder="Enter Id Group" aria-label="default input example">
+                    </div>
+
+                    <div><input class="btn btn-success" type="submit" value="Register"></div>
+
+                </form>
             </div>
         </div>
-     <jsp:include page="footer.jsp" /> 
+        <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"
         ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>
 

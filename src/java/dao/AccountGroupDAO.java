@@ -31,6 +31,19 @@ public class AccountGroupDAO extends DBContext {
         }
     }
 
+    public void outAccountGroup(int idGroup, String username) {
+        String sql = "DELETE FROM [dbo].[AccountGroup]\n"
+                + "      WHERE [username]=? and groupID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setInt(2, idGroup);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getAccGr(int idGroup) {
         String sql = "SELECT [username]\n"
                 + "      ,[groupID]\n"

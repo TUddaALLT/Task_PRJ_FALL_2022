@@ -29,15 +29,8 @@ public class DeleteTask extends HttpServlet {
         int id;
         try {
             id = Integer.parseInt(raw_id);
-            TaskDAO taskDAO = new TaskDAO();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-            String time_maked = dateFormat.format(date).toString();
-            model.Notification notification = new model.Notification("You have deleted task " + id +" "+des,
-                    Utils.getAccountLogin(request).getUsername(), "Delete Task", time_maked);
-            NotificationDAO notificationDAO = new NotificationDAO();
-            notificationDAO.addNotification(notification);
-
+            TaskDAO taskDAO = new TaskDAO(); 
+            Utils.notification(request, "You have deleted task " + id + " " + des, "Delete Task");
             taskDAO.deleteTask(id);
             response.sendRedirect("home");
         } catch (NumberFormatException e) {

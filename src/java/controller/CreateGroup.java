@@ -55,7 +55,9 @@ public class CreateGroup extends HttpServlet {
             GroupTask groupTask = new GroupTask(Utils.getAccountLogin(request).getUsername(), nameGroup);
             GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
             groupTaskDAO.addGroupTask(groupTask);
+             Utils.notification(request, "You have create group " + nameGroup , "Create group");
             response.sendRedirect("groupcreated");
+           
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

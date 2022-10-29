@@ -18,19 +18,24 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
             />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+
         <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="./js/main.js" />
+        
     </head>
     <body >
         <jsp:include page="header.jsp" /> 
         <div style="background: #ffffff">
 
-            <div  padding-bottom: 85vh class="intro">
+            <div  padding-bottom: 84vh class="intro">
                 <section >
 
                     <div class="row  ">
                         <div class="col-md-8">
-                            <h1 style="color: black">Task Manager giúp các nhóm đẩy nhanh công việc.</h1>
+                            <h1  class="info animate__animated animate__bounce" style="color: black">Task Manager giúp các nhóm đẩy nhanh công việc.</h1>
                             <p style="color: black" translate="no">Cộng tác, quản lý dự án và đạt đến đỉnh cao năng suất mới. Từ tòa nhà cao tầng đến văn phòng tại nhà, cách thức làm việc của nhóm bạn là duy nhất—hãy hoàn thành tất cả với Task Manager.</p>
                         </div>
                         <div class="col-md-4">
@@ -44,7 +49,7 @@
                     <div>
                         <hr />
                     </div>
-                    <div style="display: flex ;    margin: 5vh 0;">
+                    <div class="items">
                         <div>
                             <img
                                 src="//images.ctfassets.net/rz1oowkt5gyp/2ozLp25HsHeANpiNqAwzGI/d60a017d2f214c28f774b35d03499782/tag.svg"
@@ -108,7 +113,7 @@
                             Không chỉ là công việc. Đó là cách chúng ta làm việc cùng nhau.
                         </h2>
                         <p translate="no">
-                            Bắt đầu với bảng Trello, danh sách và thẻ. Tùy chỉnh và mở rộng với
+                            Bắt đầu với bảng Task, danh sách và thẻ. Tùy chỉnh và mở rộng với
                             nhiều tính năng hơn khi hoạt động làm việc nhóm phát triển. Quản lý
                             dự án, sắp xếp tác vụ và tạo tinh thần làm việc nhóm—tất cả ở cùng
                             một nơi.
@@ -119,18 +124,19 @@
                             <a type="button" href="./login"> Bắt đầu làm việc </a></button></li>
 
                     </div>
-                    <img width="100%"  src="https://images.ctfassets.net/rz1oowkt5gyp/7pYWhpQ3vnntxoShaImNws/24181e476913df1dacc1690518ee54e7/trello_1_vi.png?w=1200&fm=webp" alt="alt"/>
+                    <img class="img_intro" width="1200px"  src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.15752-9/306534238_5560753497338065_3705205081923910837_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ifv9q-B2VQEAX9hQlR9&_nc_ht=scontent.fhan2-1.fna&oh=03_AdSwxnaXZzHDjpv3WmYxgiyKbEQzcHfW1El4extWsGcLOQ&oe=637EAA7A" alt="alt"/>
                 </div>
             </div>
-            
         </div>
- <jsp:include page="footer.jsp" /> 
+        <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"
         ></script>
-        
-        
+        <script
+            src="./js/main.js"
+        ></script>
+
     </body>
 </html>
 

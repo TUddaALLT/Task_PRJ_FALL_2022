@@ -5,7 +5,6 @@
 package Authentication;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,11 +13,9 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -42,7 +39,7 @@ public class SendOTP extends HttpServlet {
             otpvalue = rand.nextInt(1255650);
 
             String to = email;// change accordingly
-            
+
             // Get the session object
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -52,7 +49,7 @@ public class SendOTP extends HttpServlet {
             props.put("mail.smtp.port", "465");
             Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("tentufancr7@gmail.com", "cshdyuydqpphnosl");
+                    return new PasswordAuthentication("taskmanagerprj2022@gmail.com", "rypqjrhchawkrhoc");
                 }
             });
             try {
@@ -64,7 +61,7 @@ public class SendOTP extends HttpServlet {
                 } catch (Exception e) {
                     request.setAttribute("connection", "Mail is not exist");
                 }
-                message.setSubject("Hello " + email + " We send you OTP ");
+                message.setSubject("Hello " + email + " Task Manager send you OTP ");
                 message.setText("Your OTP is: " + otpvalue);
                 // send message
                 Transport.send(message);
@@ -73,11 +70,11 @@ public class SendOTP extends HttpServlet {
                 throw new RuntimeException(e);
             }
             request.setAttribute("message", "OTP is sent to your email id");
-            //request.setAttribute("connection", con);
+
             mySession.setAttribute("otp", otpvalue);
             mySession.setAttribute("email", email);
             request.getRequestDispatcher("./view/register.jsp").forward(request, response);
-            //request.setAttribute("status", "success");
+
         }
     }
 

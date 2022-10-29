@@ -19,6 +19,11 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
             /> 
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+        <link
         <link rel="stylesheet" href="./css/main.css" />
     </head>
     <body>
@@ -56,8 +61,9 @@
                             >
                             <i class="fa-solid fa-user-group"></i> Members
                         </button>
-                        <button class="btn btn-primary" type="button">
-                            <i class="fa-solid fa-person-from-portal"></i> Out group
+                        <button onclick="outGroup('${l.groupID}')" class="btn btn-primary" type="button">
+                            <i class="fa-solid fa-person-from-portal"></i> 
+                            <a>Out group</a>
                         </button>
                     </p>
                     <div style="width: 35%; margin: 0 auto">
@@ -84,9 +90,12 @@
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"
         ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script
             src="./js/main.js"
         ></script>
+        
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>
 

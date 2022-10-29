@@ -75,6 +75,7 @@ public class UpdateTask extends HttpServlet {
             Task t;
             t = new Task(id, describe, status, groupID, time_maked, time, img);
             taskDAO.updateTask(t);
+            Utils.notification(request, "You have updated task " + describe , "Update task");
             request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
             request.getRequestDispatcher("./view/home.jsp").forward(request, response);
 

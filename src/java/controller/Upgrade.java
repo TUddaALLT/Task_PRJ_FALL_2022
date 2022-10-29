@@ -20,7 +20,6 @@ import model.Account;
  */
 public class Upgrade extends BaseRequiredAuthentication {
 
-      
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,17 +28,17 @@ public class Upgrade extends BaseRequiredAuthentication {
         if (account != null) {
             AccountDAO accountDAO = new AccountDAO();
             accountDAO.upgrade(account);
-            httpSession.setAttribute("login", new Account(account.getUsername(), account.getPassword(),1));
-
+            httpSession.setAttribute("login", new Account(account.getUsername(), account.getPassword(), 1));
+            Utils.notification(request, "You have upgraded ", "Upgrade");
         }
         request.getRequestDispatcher("./view/upgrade.jsp").forward(request, response);
 //        response.sendRedirect("home");
     }
- 
+
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
- 
+
 }

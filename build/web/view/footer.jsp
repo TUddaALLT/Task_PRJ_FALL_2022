@@ -26,7 +26,6 @@
                 background: rgb(113 188 193);
                 height: auto;
                 width: 100vw;
-
                 padding-top: 40px;
                 color: #fff;
             }
@@ -64,8 +63,7 @@
                 text-decoration: none;
                 color: #fff;
                 border: 1.1px solid white;
-                padding: 5px;
-
+                padding: 15px;
                 border-radius: 50%;
             }
             .socials a i {
@@ -79,10 +77,11 @@
             }
 
             .footer-bottom {
+                display: flex;
+                justify-content: space-around;
                 background: rgb(29, 66, 67);
                 width: 100vw;
-                padding: 20px;
-                padding-bottom: 40px;
+                padding:  20px 20px 0 20px; 
                 text-align: center;
             }
             .footer-bottom p {
@@ -132,30 +131,24 @@
         <footer>
             <div class="footer-content">
                 <h3>Task Manager</h3>
-                <p>
+                <p style="color: white">
                     Đăng ký và bắt đầu với Task ngay hôm nay. Một thế giới làm việc nhóm
                     hiệu quả đang chờ đợi bạn!
                 </p>
                 <ul class="socials">
-                    <li>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    <li >
+                        <a style="background: #385899"  href="#"><i  class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a style="background: #1ea1f3"  href="#"><i class="fa fa-twitter"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-youtube"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-linkedin-square"></i></a>
-                    </li>
+                        <a style="background: red" href="#"><i class="fa fa-google-plus"></i></a>
+                    </li> 
                 </ul>
             </div>
             <div class="footer-bottom">
-                <p>copyright &copy;2022 <a href="#">tuddahe161500@fpt.edu.vn</a></p>
+                <div>Copyright &copy;2022 <a href="#">tuddahe161500@fpt.edu.vn</a></div>
                 <div class="footer-menu">
                     <ul class="f-menu">
                         <li><a href="">Home</a></li>
@@ -167,5 +160,6 @@
             </div>
         </footer>
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </html>
 

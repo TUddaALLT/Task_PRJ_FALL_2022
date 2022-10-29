@@ -80,6 +80,14 @@
         <servlet-name>DeleteGroup</servlet-name>
         <servlet-class>controller.DeleteGroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OutGroup</servlet-name>
+        <servlet-class>controller.OutGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TaskSuccess</servlet-name>
+        <servlet-class>controller.TaskSuccess</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>DeleteGroup</servlet-name>
         <url-pattern>/deletegroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OutGroup</servlet-name>
+        <url-pattern>/outgroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskSuccess</servlet-name>
+        <url-pattern>/tasksuccess</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="notfound">
-            <div>
+            <div style="color: white">
                 <div class="notfound-404">
                     <h1>404</h1>
                 </div>

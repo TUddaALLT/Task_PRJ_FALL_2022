@@ -35,17 +35,36 @@ public class Home extends BaseRequiredAuthentication {
             }
         }
         HttpSession session = request.getSession();
-
         ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
         String time = "";
-        for (Task task : listTasksNoti) {
-            time = time + " " + task.getTime_exc();
+        String des = "";
+
+        String t = taskDAO.getTaskSuccess(Utils.getAccountLogin(request).getUsername());
+
+        String x[] = t.split(" ");
+
+        ArrayList<Integer> dones = new ArrayList<>();
+        dones.add(Integer.MAX_VALUE);
+        for (String string : x) {
+            if (!string.equals("")) {
+                dones.add(Integer.parseInt(string));
+            }
         }
 
+        request.setAttribute("dones", dones);
+        for (Task task : listTasksNoti) {
+            time = time + " " + task.getTime_exc();
+            des = des + "*" + task.getDescribe();
+
+        }
+        if (des.length() > 1) {
+            des = des.substring(1);
+        }
+
+        session.setAttribute("des", des);
         session.setAttribute("time", time.trim());
         request.setAttribute("tasks", taskDAO.getTop2Tasks(username));
         request.getRequestDispatcher("./view/home.jsp").forward(request, response);
-
     }
 
     @Override
@@ -65,10 +84,14 @@ public class Home extends BaseRequiredAuthentication {
 
         ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
         String time = "";
+        String des = "";
         for (Task task : listTasksNoti) {
             time = time + " " + task.getTime_exc();
+            des = des + "*" + task.getDescribe();
         }
         session.setAttribute("time", time);
+        des = des.substring(1);
+        session.setAttribute("des", des);
         int number;
         try {
             String raw_num = request.getParameter("ex");
@@ -80,52 +103,82 @@ public class Home extends BaseRequiredAuthentication {
         PrintWriter out = response.getWriter();
 
         ArrayList<Task> listTasks = taskDAO.getTop2NextTasks(username, number);
+        ArrayList<Integer> dones = new ArrayList<>();
+        try {
+            String t = taskDAO.getTaskSuccess(Utils.getAccountLogin(request).getUsername());
+
+            String x[] = t.split(" ");
+
+            for (String string : x) {
+                dones.add(Integer.parseInt(string));
+            }
+
+            request.setAttribute("dones", dones);
+        } catch (Exception e) {
+        }
 
         for (Task listTask : listTasks) {
             String status = "";
-            if (listTask.getStatus() == 1) {
-                status = "<h5 class=\"card-title\" style=\"color: green ;font-weight: bold;\">\n"
-                        + "                                        Status: On-going\n"
-                        + "                                    </h5>";
-            } else if (listTask.getStatus() == 2) {
-                status = "<h5 class=\"card-title\" style=\"color: blue ; font-weight: bold;\">\n"
-                        + "                                        Status: End\n"
-                        + "                                    </h5> ";
-            } else {
-                status = "<h5 class=\"card-title\" style=\"color: red;font-weight: bold;\">\n"
-                        + "                                        Status: Start\n"
-                        + "                                    </h5>";
+            switch (listTask.getStatus()) {
+                case 1:
+                    status = "<h5 class=\"card-title\" style=\"color: green ;font-weight: bold;\">\n"
+                            + "                                        Status: On-going\n"
+                            + "                                    </h5>";
+                    break;
+                case 2:
+                    status = "<h5 class=\"card-title\" style=\"color: blue ; font-weight: bold;\">\n"
+                            + "                                        Status: End\n"
+                            + "                                    </h5> ";
+                    break;
+                default:
+                    status = "<h5 class=\"card-title\" style=\"color: red;font-weight: bold;\">\n"
+                            + "                                        Status: Start\n"
+                            + "                                    </h5>";
+                    break;
             }
             String task = "";
             String update = "";
             String delete = "";
             if (listTask.getGroupID() != 0) {
-                task = "<p>Task from: " + listTask.getUsername() + "<p>";
+                task = "<h5>Task from: " + listTask.getUsername() + "<h5>";
             } else if (listTask.getGroupID() == 0) {
-                task = "<p>Your task<p>";
+                task = "<h5>Your task<h5>";
             }
             if ((listTask.getGroupID() != 0) && !(listTask.getUsername().equals(username))) {
-                update = "   <a href=\"./updatetask\" class=\"btn btn-primary disabled \">Update Task</a>";
-                delete = "<div class=\"btn btn-primary disabled\">\n"
+                update = "<span tabindex=\"0\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"You can not update\">   <a href=\"./updatetask\"  class=\"btn btn-primary disabled \"><i class=\"fa-solid fa-pen-nib\"></i></a> </span>";
+                int isdone = 0;
+                if (!dones.isEmpty()) {
+                    for (Integer done : dones) {
+                        if (done == listTask.getId()) {
+                            update += "<span tabindex=\"0\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Task have been completed\"> <a onclick=\"doneTask(this,'" + listTask.getId() + "','" + listTask.getGroupID() + "','" + listTask.getUsername() + "')\" class=\"btn btn-success done_task disabled \"><i class=\"fa-solid fa-check\"></i></a> </span>";
+                            isdone = 1;
+                            break;
+                        }
+                    }
+                }
+                if (isdone != 1) {
+                    update += " <a onclick=\"doneTask(this,'" + listTask.getId() + "','" + listTask.getGroupID() + "','" + listTask.getUsername() + "')\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Complete Task\" class=\"btn btn-success done_task  \"><i class=\"fa-solid fa-check\"></i></a>";
+                }
+                delete = " <span tabindex=\"0\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"You can not delete\"><a class=\"btn btn-danger disabled\">\n"
                         + "                                            <i onclick=\"deleteTask('${t.id}')\" class=\"fa-solid fa-trash \"></i> \n"
-                        + "                                        </div>\n";
+                        + "                                        </a> </span>\n";
             }
             if ((listTask.getGroupID() == 0) || (listTask.getUsername().equals(username))) {
-                update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" class=\"btn btn-primary   \">Update Task</a>";
-                delete = "<div class=\"btn btn-primary \">\n"
-                        + "<i onclick=\"deleteTask('" + listTask.getId() + "')\" class=\"fa-solid fa-trash \"></i> \n"
+                update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Update Task\" class=\"btn btn-primary   \"><i class=\"fa-solid fa-pen-nib\"></i></a>";
+                delete = "<div data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete Task\" class=\"btn btn-danger \">\n"
+                        + "<i onclick=\"deleteTask('" + listTask.getId() + "','" + listTask.getDescribe() + "')\" class=\"fa-solid fa-trash \"></i> \n"
                         + "                                        </div>"
                         + "\n";
             }
-            out.println(" <div class=\"main\">\n"
-                    + "                        <div class=\"card\" >\n"
-                    + "                            <div style=\" height: 40vh; \">"
-                    + "<img src=\"files/" + listTask.getImg() + "\" class=\"card-img-top\" style=\"height: 100%;  object-fit: cover\"/>"
+            out.println(" <div class=\"main animate__animated animate__backInUp \">\n"
+                    + "                        <div class=\"content_task\" >\n"
+                    + "                            <div style=\"  height: 25vh;  width: 10vw  \">"
+                    + "<img src=\"files/" + listTask.getImg() + "\" class=\"card-img-top\" style=\"height: 100%;border-radius: 5px; min-width:154px; background-repeat: repeat-y;  object-fit: cover\"/>"
                     + ""
                     + "</div>\n"
                     + "                                <div class=\"card-body\">\n"
                     + status + task
-                    + "                                <p>Description: " + listTask.getDescribe() + "</p>\n"
+                    + "                                <h5>Description: " + listTask.getDescribe() + "</h5>\n"
                     + "                                <div class=\"trash\">\n"
                     + "\n"
                     + update + delete
@@ -137,5 +190,4 @@ public class Home extends BaseRequiredAuthentication {
             );
         }
     }
-
 }

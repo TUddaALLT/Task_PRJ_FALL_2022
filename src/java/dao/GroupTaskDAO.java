@@ -109,7 +109,6 @@ public class GroupTaskDAO extends DBContext {
                 return new GroupTask(resultSet.getInt("groupID"),
                         resultSet.getString("groupOfusername"), resultSet.getString("groupName"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

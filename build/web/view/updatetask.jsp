@@ -18,6 +18,11 @@
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
             />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+        <link
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./js/main.js" />
     </head>
@@ -39,30 +44,30 @@
                 <input type="hidden"  name="id" value="${requestScope.task.id}">
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Status</label>
-                    <select name="status"  class="form-select" aria-label="Default select example"> 
+                    <select name="status" required=""  class="form-select" aria-label="Default select example"> 
                         <option value="1">On-going</option>
                         <option value="2">End</option>
                         <option value="3">Start</option>
                     </select>
                 </div>
-                 <div class="mb-3">
+                <div class="mb-3">
                     <label for="formFile" class="form-label">Image</label>
-                    <input name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+                    <input name="img" required=""  class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
 
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
-                    <textarea value="${requestScope.task.describe}" name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
+                    <textarea   name="describe"  rows="8"  class="form-control" type="text"  aria-label="default input example">${requestScope.task.describe}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Time Expired</label>  
-                    <input name="alarmTime" type="datetime-local">
+                    <input name="alarmTime" required="" type="datetime-local">
                 </div>
                 <input class="btn btn-success" type="submit" value="Save">
 
             </form>
         </div>
-     <jsp:include page="footer.jsp" /> 
+        <jsp:include page="footer.jsp" /> 
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

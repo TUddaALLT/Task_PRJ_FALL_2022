@@ -56,6 +56,50 @@ public class TaskDAO extends DBContext {
         }
     }
 
+    public void addTaskSuccess(int id, int groupID, String usernameMake, String usernameDo) {
+        String sql = "INSERT INTO [dbo].[TaskSuccess]\n"
+                + "           ([taskID]\n"
+                + "           ,[groupID]\n"
+                + "           ,[usernameMake]\n"
+                + "           ,[usernameDo])\n"
+                + "     VALUES\n"
+                + "           (?"
+                + "           ,?"
+                + "           ,?"
+                + "           ,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, groupID);
+            preparedStatement.setString(3, usernameMake);
+            preparedStatement.setString(4, usernameDo);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getTaskSuccess(String usernameDo) {
+        String sql = "SELECT [taskID]\n"
+                + "      ,[groupID]\n"
+                + "      ,[usernameMake]\n"
+                + "      ,[usernameDo]\n"
+                + "  FROM [tasks2022].[dbo].[TaskSuccess] where [usernameDo] =?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, usernameDo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String re = "";
+            while (resultSet.next()) {
+                re+=" "+resultSet.getInt("taskID");
+            }
+            return re.trim();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Task> getTasks(String username) {
         ArrayList<Task> tasks = new ArrayList<>();
         String sql = "SELECT [id]\n"
@@ -99,7 +143,7 @@ public class TaskDAO extends DBContext {
                 + "groupID in (select groupID from AccountGroup where username = ?)"
                 + "  order by id \n"
                 + "  offset ? rows\n"
-                + "  fetch next 1 rows only";
+                + "  fetch next 4 rows only";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
@@ -166,15 +210,15 @@ public class TaskDAO extends DBContext {
 
     public ArrayList<Task> getTop2Tasks(String username) {
         ArrayList<Task> tasks = new ArrayList<>();
-        String sql = "SELECT TOP (2) [id]\n"
+        String sql = "SELECT TOP (4) [id]\n"
                 + "      ,[img]\n"
                 + "      ,[describe]\n"
                 + "      ,[status]\n"
                 + "      ,[taskOfUser]\n"
                 + "      ,[groupID] , time_maked, time\n"
-                + "  FROM [tasks2022].[dbo].[Tasks]\n"
+                + "  FROM [tasks2022].[dbo].[Tasks] \n"
                 + "   where taskOfUser = ? or \n"
-                + "               groupID in (select groupID from AccountGroup where username = ?)";
+                + "               groupID in (select groupID from AccountGroup where username = ?) ";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);

@@ -35,19 +35,9 @@ public class DeleteGroup extends HttpServlet {
             taskDAO.deleteTaskById(id);
             GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
             groupTaskDAO.deleteGroupTask(id);
-            
-            // notification
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-            String time_maked = dateFormat.format(date);
-            model.Notification notification = new model.Notification("You have deleted group " + id,
-                    Utils.getAccountLogin(request).getUsername(), "Deleted group", time_maked);
-            NotificationDAO notificationDAO = new NotificationDAO();
-            notificationDAO.addNotification(notification);
-            
+            Utils.notification(request, "You have deleted group " + id, "Deleted group");
             response.sendRedirect("groupcreated");
-            
-            
+
         } catch (Exception e) {
         }
     }

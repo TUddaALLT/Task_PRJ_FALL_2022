@@ -3,7 +3,6 @@ package ForgetPassWithGmail;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -47,14 +46,15 @@ public class ForgotPassword extends HttpServlet {
             props.put("mail.smtp.port", "465");
             Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("tentufancr7@gmail.com", "cshdyuydqpphnosl");
+//                    pass fpttaskmanagerprj2022
+                    return new PasswordAuthentication("taskmanagerprj2022@gmail.com", "rypqjrhchawkrhoc");
                 }
             });
             try {
                 MimeMessage message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(email));// change accordingly
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-                message.setSubject("Hello " + email + " We send you OTP ");
+                message.setSubject("Hello " + email + " Task manager send you OTP ");
                 message.setText("Your OTP is: " + otpvalue);
                 // send message
                 Transport.send(message); 

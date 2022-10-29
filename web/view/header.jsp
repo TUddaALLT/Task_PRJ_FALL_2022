@@ -15,6 +15,11 @@
         <title>Document</title>
         <link
             rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+        <link
+            <link
+            rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
             crossorigin="anonymous"
@@ -22,16 +27,15 @@
         <link rel="stylesheet" href="./css/main.css" />
     </head>
     <body>
+
         <div  class="nav" >
-
             <button class="more" onclick="open_nav()"><i class="fa-solid fa-bars"></i></button>
-
             <div class="nav_l  ">
                 <div>
                     <a href="./start">Get Started</a>
                 </div>
                 <div>
-                    <a onclick="setAlarm('${sessionScope.time}')"  href="./home">Home</a>
+                    <a onclick="setAlarm('${sessionScope.time}')"  href="./home"><i class="fa-solid fa-house-user"></i></a>
                 </div>
                 <div>
                     <a href="./add">Add Task</a>
@@ -54,35 +58,15 @@
                                 <a href="./upgrade">Upgrade</a></button></li> 
 
                     </ul>
-                </div>
-
-                <div onclick="getNotification()" class="my-btn">
-                    <div class="my-btn-border"></div>
-                    <i class="fas fa-bell btn-bell"></i>
-                </div>
-                <div style="
-                     position: absolute;
-                     margin-top: 90vh;
-                     margin-left: 72vw;
-                     border-radius: 10px;
-                     background: white;
-                     width: 25vw;
-                     border: solid 1px gray;
-                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                     height: 80vh;
-                     overflow: auto;
-                     display: none;
-                     "  class="open_noti">
+                </div> 
+                <div style="display: none" class="animate__animated animate__fadeInTopRight animate__faster open_noti">
                     <div class="list-group noti_list"> 
-
                     </div>
-
-
                 </div>
             </div>
             <div  class="nav_r">
 
-                <div><span id="username_text">Welcome <span> </span> ${cookie['usernameCookie'].getValue()}</span></div>
+                <div><span style="color: white"   id="username_text">Welcome ${cookie['usernameCookie'].getValue()}</span></div>
                 <div class="dropdown dropdown_acc">
                     <button class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
@@ -100,9 +84,6 @@
                     </ul>
                 </div>
             </div>
-
-
-
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script
@@ -119,6 +100,10 @@
         <script
             src="./js/main.js"
         ></script>
+        <div onclick="getNotification()" class="my-btn">
+            <div class="my-btn-border"></div>
+            <i class="fas fa-bell btn-bell"></i>
+        </div>
     </body>
 </html>
 

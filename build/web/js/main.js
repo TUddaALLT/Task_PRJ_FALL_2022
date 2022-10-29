@@ -18,7 +18,58 @@ function deleteTask(id, describe) {
 
 
 }
+function doneTask(e,id, groupID, usernameMake) {
+    swal({
+        title: "Have you done this task?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
 
+                if (willDelete) {
+                    $.ajax({
+                        url: "/Tasks/tasksuccess",
+                        type: "get",
+                        data: {
+                            id: id,
+                            groupID: groupID,
+                            usernameMake: usernameMake
+                        },
+                        success: function (data) {
+//                var row = document.querySelector("#ajax");
+//                row.innerHTML += data;
+
+                        },
+                        error: function (xhr) {
+                            //Do Something to handle error
+                        }
+                    });
+                     e.classList.add("disabled");
+                   
+                        
+                } else {
+                    swal("You have not done this task");
+                }
+
+            });
+}
+function outGroup(id) {
+    swal({
+        title: "Are you sure?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    window.location = "./outgroup?id=" + id;
+                } else {
+                    swal("You are in this group");
+                }
+            });
+}
 setInterval(notification, 1000);
 function updateTask(id) {
 
@@ -49,7 +100,6 @@ function open_nav() {
 
 }
 function  do_assigntask(groupID) {
-
     window.location = "./assigntask?groupID=" + groupID;
 }
 function  delete_group(id) {
@@ -62,7 +112,7 @@ function  delete_group(id) {
     })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location = "./deletegroup?id=" + id ;
+                    window.location = "./deletegroup?id=" + id;
                 } else {
                     swal("Your imaginary file is safe!");
                 }
@@ -70,9 +120,9 @@ function  delete_group(id) {
 }
 let x = document.getElementById("username_text").offsetWidth + 180;
 document.querySelector(".nav_r").style.width = `${x}px`;
-
 function notification() {
 //    let amount = document.getElementsByClassName("card").length;
+
     $.ajax({
         url: "/Tasks/notification",
         type: "get",
@@ -90,9 +140,7 @@ function notification() {
                 const myTimeout = setTimeout(function () {
                     notification.style.display = "none";
                 }, 5000);
-
             }
-
         },
         error: function (xhr) {
             //Do Something to handle error
@@ -125,29 +173,36 @@ function getNotification() {
 
 }
 function loadMore() {
-    let amount = document.getElementsByClassName("card").length;
-    $.ajax({
-        url: "/Tasks/home",
-        type: "post",
-        data: {
-            ex: amount
-        },
-        success: function (data) {
-            var row = document.querySelector("#ajax");
-            row.innerHTML += data;
-        },
-        error: function (xhr) {
-            //Do Something to handle error
-        }
-    });
+    document.querySelector(".btn_load").style.display = "none";
+    document.querySelector(".loader").style.display = "block";
+    const myTimeout = setTimeout(() => {
+        let amount = document.getElementsByClassName("content_task").length;
+        $.ajax({
+            url: "/Tasks/home",
+            type: "post",
+            data: {
+                ex: amount
+            },
+            success: function (data) {
+                var row = document.querySelector("#ajax");
+                row.innerHTML += data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+        document.querySelector(".btn_load").style.display = "flex";
+        document.querySelector(".loader").style.display = "none";
+    }, 1000);
+
 }
-
-
-function setAlarm(time) {
+function setAlarm(time, des) {
     console.log(typeof (time));
     time = time.split(" ");
+    des = des.split("*");
     console.log(typeof (time));
     let time_ex = [];
+    let des_ex = [];
     console.log(time);
 
     for (let i = 0; i < time.length; i++) {
@@ -156,18 +211,19 @@ function setAlarm(time) {
         if (timeAlarm > current) {
             let timeout = timeAlarm.getTime() - current.getTime();
             time_ex.push(timeout);
+            des_ex.push(des[i]);
         }
     }
 
-    time_ex.sort();
+//    time_ex.sort();
     console.log(time_ex);
-    for (const timeout of time_ex) {
+    for (let i = 0; i < time_ex.length; i++) {
         setTimeout(() => swal({
-                title: "Task is expired " + time,
+                title: "Task is expired " + des_ex[i],
                 text: "You clicked the button!",
                 icon: "error",
                 button: "Ok "
-            }), timeout);
+            }), time_ex[i]);
     }
 }
 //preview img
@@ -178,3 +234,5 @@ var loadFile = function (event) {
         URL.revokeObjectURL(output.src) // free memory
     }
 };
+
+ 

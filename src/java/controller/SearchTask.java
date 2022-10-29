@@ -35,16 +35,16 @@ public class SearchTask extends HttpServlet {
             }
         }
         String describe = request.getParameter("describe");
-        int  status = Integer.parseInt(request.getParameter("status"));
+        int status = Integer.parseInt(request.getParameter("status"));
         if (describe.equals("") && status == 0) {
             request.setAttribute("tasks", taskDAO.getTop2Tasks(username));
             request.getRequestDispatcher("./view/home.jsp").forward(request, response);
+        } else {
+            ArrayList<Task> listTasks = taskDAO.searchTasks(describe.trim(), status, username);
+            request.setAttribute("tasks", listTasks);
+            request.setAttribute("search", "search");
+            request.getRequestDispatcher("./view/home.jsp").forward(request, response);
         }
-
-        ArrayList<Task> listTasks = taskDAO.searchTasks(describe,  status, username);
-        request.setAttribute("tasks", listTasks);
-        request.setAttribute("search", "search");
-        request.getRequestDispatcher("./view/home.jsp").forward(request, response);
     }
 
 }

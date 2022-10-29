@@ -73,21 +73,20 @@ public class Add extends BaseRequiredAuthentication {
             } else {
                 des = describe;
             }
-            model.Notification notification = new model.Notification("You have added task " + des,
-                    Utils.getAccountLogin(request).getUsername(), "You Add Task", time_maked);
             NotificationDAO notificationDAO = new NotificationDAO();
-            notificationDAO.addNotification(notification);
+            Utils.notification(request, "You have added task " + des, "You Add Task");
             //
             AccountGroupDAO accountGroupDAO = new AccountGroupDAO();
             String st = accountGroupDAO.getAccGr(groupID);
             String usernames[] = st.split(" ");
-            for (String username : usernames) { 
+            for (String username : usernames) {
                 model.Notification noti = new model.Notification("You have a task " + des,
                         username, "Task From " + Utils.getAccountLogin(request).getUsername(), time_maked);
                 notificationDAO.addNotification(noti);
+                if (groupID != 0) {
+                    Utils.sendNotificationToGmail(Utils.getAccountLogin(request).getUsername(), username, des);
+                }
             }
-//            request.setAttribute("tasks", taskDAO.getTop2Tasks(Utils.getAccountLogin(request).getUsername()));
-//            request.getRequestDispatcher("./view/home.jsp").forward(request, response);
             response.sendRedirect("home");
         } catch (NumberFormatException e) {
             e.printStackTrace();
