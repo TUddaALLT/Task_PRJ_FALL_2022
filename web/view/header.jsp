@@ -28,7 +28,7 @@
     </head>
     <body>
 
-        <div  class="nav" >
+        <div  class="nav" style="background: #273e5d " >
             <button class="more" onclick="open_nav()"><i class="fa-solid fa-bars"></i></button>
             <div class="nav_l  ">
                 <div>
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="dropdown dropdown_group">
-                    <button class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button style="color: white" class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Group
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -68,7 +68,7 @@
 
                 <div><span style="color: white"   id="username_text">Welcome ${cookie['usernameCookie'].getValue()}</span></div>
                 <div class="dropdown dropdown_acc">
-                    <button class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button style="color: white" class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">

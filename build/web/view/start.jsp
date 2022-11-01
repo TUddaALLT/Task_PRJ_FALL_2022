@@ -24,21 +24,20 @@
             />
 
         <link rel="stylesheet" href="./css/main.css" />
-        
+
     </head>
     <body >
         <jsp:include page="header.jsp" /> 
         <div style="background: #ffffff">
-
             <div  padding-bottom: 84vh class="intro">
                 <section >
 
                     <div class="row  ">
                         <div class="col-md-8">
                             <h1  class="info animate__animated animate__bounce" style="color: black">Task Manager giúp các nhóm đẩy nhanh công việc.</h1>
-                            <p style="color: black" translate="no">Cộng tác, quản lý dự án và đạt đến đỉnh cao năng suất mới. Từ tòa nhà cao tầng đến văn phòng tại nhà, cách thức làm việc của nhóm bạn là duy nhất—hãy hoàn thành tất cả với Task Manager.</p>
+                            <p class="animate__animated animate__backInLeft" style="color: black" translate="no">Cộng tác, quản lý dự án và đạt đến đỉnh cao năng suất mới. Từ tòa nhà cao tầng đến văn phòng tại nhà, cách thức làm việc của nhóm bạn là duy nhất—hãy hoàn thành tất cả với Task Manager.</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 animate__animated animate__backInRight">
                             <img  src="//images.ctfassets.net/rz1oowkt5gyp/5QIzYxue6b7raOnVFtMyQs/113acb8633ee8f0c9cb305d3a228823c/hero.png?w=576" alt="" width="465.5" height="602.5" loading="lazy" class="intro_img">
                         </div>
                     </div>
@@ -124,7 +123,21 @@
                             <a type="button" href="./login"> Bắt đầu làm việc </a></button></li>
 
                     </div>
-                    <img class="img_intro" width="1200px"  src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.15752-9/306534238_5560753497338065_3705205081923910837_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ifv9q-B2VQEAX9hQlR9&_nc_ht=scontent.fhan2-1.fna&oh=03_AdSwxnaXZzHDjpv3WmYxgiyKbEQzcHfW1El4extWsGcLOQ&oe=637EAA7A" alt="alt"/>
+                    <img class="img_intro" width="1200px"  src="https://scontent.fhan2-5.fna.fbcdn.net/v/t1.15752-9/310264300_510135490977621_4765943951569315219_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=QZCE9x1zWnEAX-oba5d&tn=o8Qcd8VVTHs3O0Jt&_nc_ht=scontent.fhan2-5.fna&oh=03_AdTyNKnR7fQKXLhFkWwI8KQmPKr9Q6GKJcTRvjVYjgPadA&oe=63843ECB" alt="alt"/>
+                </div>
+
+                <div class="row" style="text-align: center ">
+                    <h2 style="margin-bottom: 5vh">How To Use Task Manager? </h2>
+                    <div class="col-md-12" style="text-align: left ; padding: 0 10vw ;    font-size: 22px;">
+                        <ul>
+                            <li style="margin: 5vh 0">Register by gmail,Login and Login with google account, forgot password with gmail</li>
+                            <li style="margin: 5vh 0">Account basic can create, update, delete, search, sort task, join in, out, watch member group task, received
+                                notification when task is assigned from UPGRADED Account</li>
+                            <li style="margin: 5vh 0"> UPGRADED Account can do the same thing as Account basic 
+                                and more it can create, delete group, assign task for group, kick member,
+                                watch member have done task and have not done task</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

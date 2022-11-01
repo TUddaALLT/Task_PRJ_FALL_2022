@@ -34,15 +34,7 @@
             <div class="label_add_task">
                 Create Group
             </div>
-            <form action="./creategroup" method="post"  >
-<!--                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Name</label>        
-                    <input class="form-control" required="" name="name" type="text" placeholder="Enter Name" aria-label="default input example">
-                </div>-->
-<!--                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">ID Group</label>        
-                    <input class="form-control" required="" name="id" type="number" placeholder="Enter Id Group" aria-label="default input example">
-                </div>-->
+            <form action="./creategroup" method="post"  > 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Group Name</label>        
                     <input class="form-control" required="" name="namegroup" type="text" placeholder="Enter Group Name" aria-label="default input example">

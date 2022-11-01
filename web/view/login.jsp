@@ -46,8 +46,8 @@
                                             <div style="width: 100%" class="d-flex justify-content-center">
                                                 <input style="width: 100%" type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body" value="Login"/>
                                             </div>
-                                            <div style="width: 100% ; margin-top: 3em" class="d-flex justify-content-center">
-                                                <a style="width: 100%; " class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:9999/Tasks/login&response_type=code
+                                            <div style="width: 100% ;  margin-top: 3em" class="d-flex justify-content-center ">
+                                                <a style="width: 100%; " class="btn btn-danger btn-block gg_login btn-lg gradient-custom-4 text-body" href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:9999/Tasks/login&response_type=code
                                                    &client_id=641835329293-5dv586l39j3om29fo4ekshqed1hb2td2.apps.googleusercontent.com&approval_prompt=force">
                                                     <span style="    margin-right: 20px;
                                                           "><i class="fa-brands fa-google"></i> </span>

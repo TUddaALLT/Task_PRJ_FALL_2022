@@ -9,11 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.management.Query;
+import java.util.Map; 
 import model.Task;
+import model.TaskSuccess;
 
 /**
  *
@@ -91,9 +89,34 @@ public class TaskDAO extends DBContext {
             ResultSet resultSet = preparedStatement.executeQuery();
             String re = "";
             while (resultSet.next()) {
-                re+=" "+resultSet.getInt("taskID");
+                re += " " + resultSet.getInt("taskID");
             }
             return re.trim();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<TaskSuccess> getUsernameDoneTask(String usernameMake, int groupID) {
+        String sql = "SELECT [taskID]\n"
+                + "      ,[groupID]\n"
+                + "      ,[usernameMake]\n"
+                + "      ,[usernameDo]\n"
+                + "  FROM [tasks2022].[dbo].[TaskSuccess] where [usernameMake] =? and groupID =?";
+        ArrayList<TaskSuccess> taskSuccesses = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, usernameMake);
+            preparedStatement.setInt(2, groupID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                TaskSuccess taskSuccess = new TaskSuccess(resultSet.getInt("taskID"),
+                        resultSet.getInt("groupID"), resultSet.getString("usernameMake"), resultSet.getString("usernameDo"));
+                taskSuccesses.add(taskSuccess);
+            }
+            return taskSuccesses;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +165,37 @@ public class TaskDAO extends DBContext {
                 + "  FROM [dbo].[Tasks]\n" + "  where taskOfUser = ? or "
                 + "groupID in (select groupID from AccountGroup where username = ?)"
                 + "  order by id \n"
+                + "  offset ? rows\n"
+                + "  fetch next 4 rows only";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, username);
+            preparedStatement.setInt(3, number);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Task task = new Task(resultSet.getInt("id"), resultSet.getString("img"),
+                        resultSet.getString("describe"), resultSet.getInt("status"),
+                        resultSet.getString("taskOfUser"), resultSet.getInt("groupID"), resultSet.getString("time_maked"), resultSet.getString("time"));
+                tasks.add(task);
+            }
+            return tasks;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<Task> sortGetTop2NextTasks(String username, int number) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        String sql = "SELECT [id]\n"
+                + "      ,[img]\n"
+                + "      ,[describe]\n"
+                + "      ,[status]\n"
+                + "      ,[taskOfUser]\n"
+                + "      ,[groupID] , time_maked, time\n"
+                + "  FROM [dbo].[Tasks]\n" + "  where taskOfUser = ? or "
+                + "groupID in (select groupID from AccountGroup where username = ?)"
+                + "  order by id desc\n"
                 + "  offset ? rows\n"
                 + "  fetch next 4 rows only";
         try {

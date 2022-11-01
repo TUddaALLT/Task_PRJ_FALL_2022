@@ -37,7 +37,7 @@
                                             <div style="display: flex" class="form-outline mb-3">
                                                 <input placeholder="Your email" value="${sessionScope.email}" type="email" name="username" required=""  class=" form-control form-control-lg" />
                                                 <div class="d-flex justify-content-center">
-                                                    <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Send OTP"/>
+                                                    <input type="submit" class="gg_login btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Send OTP"/>
                                                 </div>
                                             </div>
                                         </form>
@@ -59,7 +59,7 @@
                                             <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.mess}</h4>
                                             <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.connection}</h4>
                                             <div class="d-flex justify-content-center">
-                                                <input type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Register"/>
+                                                <input type="submit" class="btn gg_login btn-success btn-block btn-lg gradient-custom-4 text-body" value="Register"/>
                                             </div>
                                             <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="./login"
                                                                                                                     class="fw-bold text-body"><u>Login here</u></a></p>

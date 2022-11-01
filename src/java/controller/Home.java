@@ -36,6 +36,7 @@ public class Home extends BaseRequiredAuthentication {
         }
         HttpSession session = request.getSession();
         ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
+
         String time = "";
         String des = "";
 
@@ -106,9 +107,7 @@ public class Home extends BaseRequiredAuthentication {
         ArrayList<Integer> dones = new ArrayList<>();
         try {
             String t = taskDAO.getTaskSuccess(Utils.getAccountLogin(request).getUsername());
-
             String x[] = t.split(" ");
-
             for (String string : x) {
                 dones.add(Integer.parseInt(string));
             }
@@ -121,28 +120,33 @@ public class Home extends BaseRequiredAuthentication {
             String status = "";
             switch (listTask.getStatus()) {
                 case 1:
-                    status = "<h5 class=\"card-title\" style=\"color: green ;font-weight: bold;\">\n"
-                            + "                                        Status: On-going\n"
-                            + "                                    </h5>";
+                    status = "<div class=\"progress\" style=\"width:50%; margin:0 auto\">\n"
+                            + "                                        <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 50%;\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\">50%</div>\n"
+                            + "                                    </div>";
                     break;
                 case 2:
-                    status = "<h5 class=\"card-title\" style=\"color: blue ; font-weight: bold;\">\n"
-                            + "                                        Status: End\n"
-                            + "                                    </h5> ";
+                    status = "<div class=\"progress\" style=\"width:50%; margin:0 auto\">\n"
+                            + "                                        <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 100%;\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\">100%</div>\n"
+                            + "                                    </div>";
                     break;
                 default:
-                    status = "<h5 class=\"card-title\" style=\"color: red;font-weight: bold;\">\n"
-                            + "                                        Status: Start\n"
-                            + "                                    </h5>";
+                    status = "                         <div class=\"progress\" style=\"width:50%; margin:0 auto\">\n"
+                            + "                                        <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 25%;\" aria-valuenow=\"25\" aria-valuemin=\"0\" aria-valuemax=\"100\">25%</div>\n"
+                            + "\n"
+                            + "                                    </div>";
                     break;
             }
             String task = "";
             String update = "";
             String delete = "";
             if (listTask.getGroupID() != 0) {
-                task = "<h5>Task from: " + listTask.getUsername() + "<h5>";
+                if (listTask.getUsername().equalsIgnoreCase(Utils.getAccountLogin(request).getUsername())) {
+                    task = "  <h5><i class=\"fa-solid fa-people-group\"></i> " + listTask.getGroupID() + " <h5>";
+                } else {
+                    task = "<h5>Task from: " + listTask.getUsername() + "<h5>";
+                }
             } else if (listTask.getGroupID() == 0) {
-                task = "<h5>Your task<h5>";
+                task = " <i style=\"color: #785ccd;font-size: 20px;\" class=\"fa-solid fa-user\"></i>";
             }
             if ((listTask.getGroupID() != 0) && !(listTask.getUsername().equals(username))) {
                 update = "<span tabindex=\"0\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"You can not update\">   <a href=\"./updatetask\"  class=\"btn btn-primary disabled \"><i class=\"fa-solid fa-pen-nib\"></i></a> </span>";
@@ -173,12 +177,12 @@ public class Home extends BaseRequiredAuthentication {
             out.println(" <div class=\"main animate__animated animate__backInUp \">\n"
                     + "                        <div class=\"content_task\" >\n"
                     + "                            <div style=\"  height: 25vh;  width: 10vw  \">"
-                    + "<img src=\"files/" + listTask.getImg() + "\" class=\"card-img-top\" style=\"height: 100%;border-radius: 5px; min-width:154px; background-repeat: repeat-y;  object-fit: cover\"/>"
+                    + "<img src=\"files/" + listTask.getImg() + "\" class=\"card-img-top\" style=\"height: 100%;border-radius: 15px 0 0 15px; min-width:154px; background-repeat: repeat-y;  object-fit: cover\"/>"
                     + ""
                     + "</div>\n"
                     + "                                <div class=\"card-body\">\n"
                     + status + task
-                    + "                                <h5>Description: " + listTask.getDescribe() + "</h5>\n"
+                    + "                                 <div style=\"padding-bottom: 15px\"><i style=\"font-size: 30px;margin-right: 10px ;color:  #ef7575\" class=\"fa-solid fa-book\"></i>  " + listTask.getDescribe() + "</div>  "
                     + "                                <div class=\"trash\">\n"
                     + "\n"
                     + update + delete

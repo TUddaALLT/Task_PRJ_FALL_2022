@@ -27,11 +27,11 @@
                 </div>
                 <h2>Oops! This Page Could Not Be Found</h2>
                 <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
-               
-                    <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="./login">Login to continue ....</a>
 
-               
-               
+                <a class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" href="./login">Login to continue ....</a>
+
+
+
             </div>    
         </div>     <jsp:include page="footer.jsp" /> 
     </body>

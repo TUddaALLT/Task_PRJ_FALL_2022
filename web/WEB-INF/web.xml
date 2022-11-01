@@ -88,6 +88,18 @@
         <servlet-name>TaskSuccess</servlet-name>
         <servlet-class>controller.TaskSuccess</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TaskInGroup</servlet-name>
+        <servlet-class>controller.TaskInGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortTask</servlet-name>
+        <servlet-class>controller.SortTask</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>KickMember</servlet-name>
+        <servlet-class>controller.KickMember</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -175,6 +187,18 @@
     <servlet-mapping>
         <servlet-name>TaskSuccess</servlet-name>
         <url-pattern>/tasksuccess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskInGroup</servlet-name>
+        <url-pattern>/taskingroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortTask</servlet-name>
+        <url-pattern>/sorttask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KickMember</servlet-name>
+        <url-pattern>/kickmember</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

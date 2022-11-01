@@ -6,12 +6,12 @@ package controller;
 
 import dao.AccountGroupDAO;
 import dao.GroupTaskDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.IOException; 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.GroupTask;
 
@@ -25,6 +25,7 @@ public class MyGroup extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+             HttpSession httpSession = request.getSession(); 
             GroupTaskDAO groupTaskDAO = new GroupTaskDAO();
             ArrayList<GroupTask> list = groupTaskDAO.getAllGroupTaskByUserName(Utils.getAccountLogin(request).getUsername());
             
@@ -33,7 +34,7 @@ public class MyGroup extends HttpServlet {
                 String la[] = accountGroupDAO.getAccGr(list.get(i).getGroupID()).split(" ");
                  list.get(i).setUsernames(la);
             }
-            request.setAttribute("list", list);
+            request.setAttribute("list", list); 
             if (groupTaskDAO.getAllGroupTaskByUserName(Utils.getAccountLogin(request).getUsername()).isEmpty()) {
                 request.setAttribute("mess", "You do not have any group");
             } else {

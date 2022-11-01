@@ -17,7 +17,7 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             />
-          <link
+        <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
             integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
@@ -37,9 +37,9 @@
             margin: 0;
         }
         #particles-js {
-            /*            background: url("https://marcbruederlin.github.io/particles.js/img/background.jpg")
-                            bottom no-repeat transparent;*/
-            background-size: cover;
+          background: 
+              url("https://haycafe.vn/wp-content/uploads/2021/12/Hinh-anh-dep-Powerpoint.png")
+          bottom no-repeat transparent;    background-size: cover;
             position: fixed;
             width: 100%;
             height: 100%;
@@ -56,94 +56,105 @@
         <jsp:include page="header.jsp" /> 
         <div class="hr1"></div>
         <c:if test="${requestScope.tasks.size()!=0}" >
+
             <div class="search">
-                <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Search Task"  data-bs-toggle="modal" href="#exampleModalToggle" role="button"> <i class="fas fa-search"></i></a>
+                <input placeholder="Search describe..." type="text" oninput="search(this.value)" 
+                       style="padding: 6.5px;
+                       border: none;
+                       border-radius: 5px;
+                       width: 12vw;">
+
+                <i style="    top: 5px;
+                   position: relative;
+                   font-size: 25px;
+                   color: rebeccapurple;
+                   right: 35px;" class="fas fa-search"></i>
+
             </div>
-        </c:if>
-        <div class="adder" style=" margin-top: 20px;
+              <div class="adder" style=" margin-top: 20px;
              display: flex;
              justify-content: center;
              ">
             <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Task"  href="./add" role="button"><i class="fa-solid fa-plus"></i></a>
         </div>
+        <div class="search_status_laptop" >
+            <div class="btn-group-vertical">
+                <span style="width: 100%; margin-bottom: 10px ;padding: 8px 0"  class="badge rounded-pill bg-info text-dark">Status</span>
+                <button type="button" onclick="search('', 3)" class="btn btn-danger">Start</button>
+                <button type="button" onclick="search('', 1)" class="btn btn-warning">Going</button>
+                <button type="button" onclick="search('', 2)" style="background: green" class="btn">End</button>
+                <button  type="button" class="btn btn-primary" onclick="sort()">
+                    New
+                </button>
+            </div>
+        </div>
+        <div class="search_status_mobile">
+            <div class="btn-group  " role="group" aria-label="...">
+                <button type="button" onclick="search('', 3)" class="btn btn-danger btn_mobile">Start</button>
+                <button type="button" onclick="search('', 1)" class="btn btn-warning btn_mobile">Going</button>
+                <button type="button" onclick="search('', 2)" style="background: green" class="btn btn_mobile">End</button>
+                 <button  type="button" class="btn btn-primary" onclick="sort()">
+                    New
+                </button>
+            </div>
+        </div>
+
         <div class="badget_intro">
             <h3 style="background: rgb(34,193,195);
-                background: linear-gradient(41deg, rgba(34,193,195,1) 0%, rgba(126,117,190,1) 52%, rgba(253,187,45,1) 100%);
-                padding: 3px 10px;
+                background: white;
+                padding: 2px 10px;
+                color: #3d99ce;
                 border-radius: 5px;">Table Project </h3> 
         </div>
+        </c:if>
+      
 
         <div class="tasks" style="padding: 60px 10% 75vh 10%; ">
             <div id="ajax" class="contain_card"> 
-
-                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="./searchtask" method="get" >
-                                    <div class="input-group">
-                                        <textarea name="describe"  rows="8"  type="search" class="form-control rounded" placeholder="Search Describe" ></textarea> 
-                                    </div>
-                                    <div style="margin: 20px 0" class="input-group">
-                                        <select name="status" class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                                            <option selected="" value="0">Status</option>
-                                            <option value="1">On-going</option>
-                                            <option value="2">End</option>
-                                            <option value="3">Start</option>
-                                        </select>
-                                    </div>
-                                    <input class="btn btn-success" type="submit" value="Search">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <c:forEach items="${requestScope.tasks}" var="t">
                     <div class="animate__animated animate__flipInX main ">
                         <div class=" content_task ">
                             <div style="height: 25vh;  width: 10vw ">
-                                <img src="<c:url value="files/${t.img}"></c:url>" class="card-img-top" style="min-width:154px; height: 100%;border-radius: 5px; background-repeat: repeat-y;  object-fit: cover"/>
+                                <img src="<c:url value="files/${t.img}"></c:url>" class="card-img-top" style="min-width:154px; height: 100%;border-radius: 15px 0 0 15px; background-repeat: repeat-y;  object-fit: cover"/>
                                 </div>
                                 <div class="card-body">
                                 <c:if test = "${t.status == 1}">
-                                    <h5 class="card-title" style=" color: green ;font-weight: bold;">
-                                        On-going
-                                    </h5>
+                                    <div class="progress" >
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                    </div>
                                 </c:if>
-                                <c:if test = "${t.status == 2}">
-                                    <h5 class="card-title" style=" color: blue ; font-weight: bold;">
-                                        End
-                                    </h5>
+                                <c:if test = "${t.status == 2}"> 
+                                    <div class="progress" >
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                    </div>
                                 </c:if> 
-                                <c:if test = "${t.status == 3}">
-                                    <h5 class="card-title" style=" color: red;font-weight: bold;">
-                                        Start
-                                    </h5>
+                                <c:if test = "${t.status == 3}"> 
+                                    <div class="progress" >
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+
+                                    </div>
                                 </c:if>
                                 <c:if test = "${t.groupID != 0}">
                                     <c:if test = "${t.username != sessionScope.login.username}">
-                                         <h5>Task from: ${t.username }<h5>
-                                    </c:if>
-                                    <c:if test = "${t.username == sessionScope.login.username}">
-                                         <h5>This task you assign to group ${t.groupID} <h5>
-                                    </c:if>             
-                                   
-                                </c:if>   
-                                        <c:if test = "${t.groupID == 0}">
-                                            <h5>Your task<h5>
+                                        <h5>Task from: ${t.username }<h5>
+                                            </c:if>
+                                            <c:if test = "${t.username == sessionScope.login.username}">
+                                                <h5><i class="fa-solid fa-people-group"></i> ${t.groupID} <h5>
+                                                    </c:if>             
+
+                                                </c:if>   
+                                                <c:if test = "${t.groupID == 0}">
+                                                    <i style="color: #785ccd;font-size: 20px;" class="fa-solid fa-user"></i>
                                                 </c:if> 
-                                                <p>Description: ${t.describe}</p>
+                                                <div style="padding-bottom: 15px"><i style="font-size: 30px;margin-right: 10px ;color:  #ef7575" class="fa-solid fa-book"></i>   ${t.describe}</div>  
                                                 <div class="trash">
                                                     <c:if test = "${t.groupID != 0 and !(t.username eq sessionScope.login.username)}">
-                                                      <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not update">   <a onclick="updateTask('${t.id}')" 
-                                                           class="btn btn-primary disabled "
+                                                        <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not update">   <a onclick="updateTask('${t.id}')" 
+                                                                                                                                                             class="btn btn-primary disabled "
 
-                                                           ><i class="fa-solid fa-pen-nib"></i></a> </span>
-                                                        </c:if>  
-                                                        <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
+                                                                                                                                                             ><i class="fa-solid fa-pen-nib"></i></a> </span>
+                                                            </c:if>  
+                                                            <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
                                                         <a onclick="updateTask('${t.id}')" class="btn btn-primary "   data-bs-toggle="tooltip" data-bs-placement="top" title="Update Task" ><i class="fa-solid fa-pen-nib"></i></a>
                                                         </c:if> 
 
@@ -166,11 +177,11 @@
 
 
                                                     <c:if test = "${t.groupID != 0 and !(t.username eq sessionScope.login.username)}">
-                                                       <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not delete"> <a class="btn btn-danger disabled">
-                                                            <i onclick="deleteTask('${t.id}', '${t.describe}')" class="fa-solid fa-trash "></i> 
-                                                           </a> </span>
-                                                    </c:if>   
-                                                    <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
+                                                        <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not delete"> <a class="btn btn-danger disabled">
+                                                                <i onclick="deleteTask('${t.id}', '${t.describe}')" class="fa-solid fa-trash "></i> 
+                                                            </a> </span>
+                                                        </c:if>   
+                                                        <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
                                                         <div class="btn btn-danger">
                                                             <i onclick="deleteTask('${t.id}', '${t.describe}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Task" class="fa-solid fa-trash "></i> 
                                                         </div>
@@ -186,7 +197,7 @@
                                                 </h1>
                                             </c:if>
                                             </div>
-                                            <section class="animate__animated animate__fadeInTopLeft notification">
+                                            <section  class="animate__animated animate__fadeInTopLeft notification">
                                                 <div class="container mt-5">
                                                     <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__btn-primary brk-library-rendered rendered show">
 
@@ -228,7 +239,7 @@
                                                             particlesJS({
                                                                 particles: {
                                                                     number: {
-                                                                        value: 85,
+                                                                        value: 185,
                                                                         density: {
                                                                             enable: true,
                                                                             value_area: 800,

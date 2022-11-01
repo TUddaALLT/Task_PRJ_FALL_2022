@@ -1,4 +1,75 @@
 
+function search(describe, status) {
+    console.log(describe);
+    var row = document.querySelector("#ajax");
+    row.innerHTML = "";
+    document.querySelector(".btn_load").style.display = "none";
+    document.querySelector(".loader").style.display = "block";
+    const myTimeout = setTimeout(() => {
+        let amount = document.getElementsByClassName("content_task").length;
+        $.ajax({
+            url: "/Tasks/searchtask",
+            type: "get",
+            data: {
+                describe: describe,
+                status: status
+            },
+            success: function (data) {
+//                var row = document.querySelector("#ajax");
+                row.innerHTML = "";
+                row.innerHTML += data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+        document.querySelector(".btn_load").style.display = "flex";
+        document.querySelector(".loader").style.display = "none";
+    }, 1000);
+
+}
+let index = 1;
+let checksort = 0;
+function sort() {
+    if (checksort === 0) {
+        loadMoreSort();
+        checksort = 1;
+    } else {
+        window.location = "./home";
+        checksort = 0;
+    }
+
+}
+function loadMoreSort() {
+    var row = document.querySelector("#ajax");
+    if (index === 1) {
+        row.innerHTML = "";
+    }
+    document.querySelector(".btn_load").style.display = "none";
+    document.querySelector(".loader").style.display = "block";
+    const myTimeout = setTimeout(() => {
+
+        $.ajax({
+            url: "/Tasks/sorttask",
+            type: "post",
+            data: {
+                ex: index
+            },
+            success: function (data) {
+//                var row = document.querySelector("#ajax");
+
+                row.innerHTML += data;
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+        index += 4;
+        document.querySelector(".btn_load").style.display = "flex";
+        document.querySelector(".loader").style.display = "none";
+    }, 1000);
+
+}
 function deleteTask(id, describe) {
     swal({
         title: "Are you sure?",
@@ -15,10 +86,8 @@ function deleteTask(id, describe) {
                     swal("Your imaginary file is safe!");
                 }
             });
-
-
 }
-function doneTask(e,id, groupID, usernameMake) {
+function doneTask(e, id, groupID, usernameMake) {
     swal({
         title: "Have you done this task?",
         icon: "warning",
@@ -45,13 +114,29 @@ function doneTask(e,id, groupID, usernameMake) {
                             //Do Something to handle error
                         }
                     });
-                     e.classList.add("disabled");
-                   
-                        
+                    e.classList.add("disabled");
+
+
                 } else {
                     swal("You have not done this task");
                 }
 
+            });
+}
+function kick(id, username) {
+    swal({
+        title: "Are you sure to kick this member?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    window.location = "./kickmember?id=" + id + "&username=" + username;
+                } else {
+                    swal("You do not kick this member");
+                }
             });
 }
 function outGroup(id) {
@@ -96,11 +181,9 @@ function open_nav() {
     } else {
         document.querySelector(".nav_l").style.top = "-276px";
         y = 1;
+        s
     }
 
-}
-function  do_assigntask(groupID) {
-    window.location = "./assigntask?groupID=" + groupID;
 }
 function  delete_group(id) {
     swal({
@@ -173,28 +256,31 @@ function getNotification() {
 
 }
 function loadMore() {
-    document.querySelector(".btn_load").style.display = "none";
-    document.querySelector(".loader").style.display = "block";
-    const myTimeout = setTimeout(() => {
-        let amount = document.getElementsByClassName("content_task").length;
-        $.ajax({
-            url: "/Tasks/home",
-            type: "post",
-            data: {
-                ex: amount
-            },
-            success: function (data) {
-                var row = document.querySelector("#ajax");
-                row.innerHTML += data;
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-        document.querySelector(".btn_load").style.display = "flex";
-        document.querySelector(".loader").style.display = "none";
-    }, 1000);
-
+    if (index === 1) {
+        document.querySelector(".btn_load").style.display = "none";
+        document.querySelector(".loader").style.display = "block";
+        const myTimeout = setTimeout(() => {
+            let amount = document.getElementsByClassName("content_task").length;
+            $.ajax({
+                url: "/Tasks/home",
+                type: "post",
+                data: {
+                    ex: amount
+                },
+                success: function (data) {
+                    var row = document.querySelector("#ajax");
+                    row.innerHTML += data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+            document.querySelector(".btn_load").style.display = "flex";
+            document.querySelector(".loader").style.display = "none";
+        }, 1000);
+    } else {
+        loadMoreSort();
+    }
 }
 function setAlarm(time, des) {
     console.log(typeof (time));

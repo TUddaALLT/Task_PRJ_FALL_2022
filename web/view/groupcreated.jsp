@@ -46,8 +46,8 @@
                                 <h3>Group Name: ${l.groupName}</h3>  <br>
                                 <h3>Group-ID: ${l.groupID}</h3> <br>
                                 <div style="display: flex ; justify-content: space-between">
-                                    <div class="btn btn-primary" onclick="do_assigntask('${l.groupID}')">Assign Task</div>
-
+                                    <a href="./assigntask?groupID=${l.groupID}" class="btn btn-primary" >Assign Task</a>
+                                    <a href="./taskingroup?groupID=${l.groupID}" class="btn btn-primary"  >Check Task </a>
                                     <div class="btn btn-danger">
                                         <i onclick="delete_group('${l.groupID}')" class="fa-solid fa-trash "></i> 
                                     </div>

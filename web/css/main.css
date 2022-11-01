@@ -26,12 +26,10 @@ html {
     display: none;
 }
 body {
-    /*background: linear-gradient(rgb(121 187 196), rgb(255, 255, 255)) no-repeat;*/
-    /*background: linear-gradient(70deg, );*/
-    background: #43C6AC;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background:
+        url("https://haycafe.vn/wp-content/uploads/2021/12/Hinh-anh-dep-Powerpoint.png")
+        bottom no-repeat transparent;
+    background-size: cover;
     font-family: "sans-serif", Arial;
     /*background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);*/
     /*overflow-x: hidden;*/
@@ -201,12 +199,15 @@ a{
 }
 .content_task{
     display: flex;
-    color: black;
+    color: white;
     height: fit-content;
     width: 30vw;
-    background : linear-gradient(whitesmoke, rgb(205, 255, 255)) no-repeat;
-    border-radius: 5px;
+    background: #273e5d;
+    /* background: linear-gradient(whitesmoke, rgb(138 165 205)) no-repeat; */
+    border-radius: 15px;
+    border: 2px solid #80b2f3;
 }
+
 .content_task p{
 
     margin-left:auto;
@@ -288,14 +289,13 @@ a{
 
 .alert-simple.alert-success
 {
-    border: 5px solid rgba(36, 241, 6, 0.46);
-    background-color: #000e29;
-    box-shadow: 0px 0px 5px #259c08;
-    color: #0ad406;
-    text-shadow: 2px 1px #00040a;
+    border: 3px solid rgb(147 147 147);
+    background-color: #f1f1f1;
+    color: #000000;
     transition: 0.5s;
     cursor: pointer;
 }
+
 .alert-success:hover{
     background-color: rgba(7, 149, 66, 0.35);
     transition:0.5s;
@@ -357,6 +357,8 @@ a{
     width: 30vw;
     bottom: 0;
     display: none;
+    left: 1vw!important;
+
 }
 .alert-danger:hover
 {
@@ -613,9 +615,10 @@ input[type="datetime-local"]{
 .btn_load{
     margin-top: 8vh;
 }
-.btn-primary,  .btn-primary:active, .btn-primary:visited , .btn-block{
+.btn-primary,   .btn-primary:visited , .btn-block{
     display: inline-block;
-    background-image: linear-gradient( 135deg, #97ABFF 10%, #123597 100%);
+    /*background-image: linear-gradient( 135deg, #97ABFF 10%, #123597 100%);*/
+    background-color: #3d99ce;
     border-radius: 5px;
     box-sizing: border-box;
     text-decoration: none;
@@ -625,18 +628,16 @@ input[type="datetime-local"]{
     text-align: center;
     transition: all 0.2s;
 }
+.btn-primary:active{
+    background-color: #ef7575;
+}
 .btn-primary:hover{
     color: #000000;
-    background-color: #ff0303;
+    background-color: #0079bf;
 }
 .btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
-    background: rgb(184,205,52);
-    background: linear-gradient(41deg, rgba(184,205,52,1) 10%, rgba(92,146,198,1) 72%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(#403294, #0747a6);
 }
-/*.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
-    background: rgb(63,94,251);
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(137,10,168,1) 51%, rgba(252,70,107,1) 100%);
-}*/
 .hr1 {
     padding: 2vh 0;
 }
@@ -647,6 +648,14 @@ input[type="datetime-local"]{
 .adder{
     position: absolute;
     left:  15vw;
+}
+.search_status_laptop   {
+    position: absolute;
+    top: 15vh;
+    left: 8vw;
+}
+.search_status_mobile{
+    display: none;
 }
 .search{
     margin-top: 20px;
@@ -664,6 +673,12 @@ input[type="datetime-local"]{
     left: 19.5vw;
     top: 12vh;
 }
+.progress{
+    width:50%;
+    margin:0 auto;
+
+}
+
 @media (max-width: 62em) {
     .nav_l{
         padding: 24px;
@@ -678,6 +693,14 @@ input[type="datetime-local"]{
         position: absolute;
         left: 21px;
         top: -276px;
+    }
+    .notification{
+        position: fixed;
+
+        bottom: 0;
+        display: none;
+        left: 1vw!important;
+        width: 94vw!important;
     }
 
     .items{
@@ -694,7 +717,7 @@ input[type="datetime-local"]{
     .dropdown_group{
         position: absolute;
         left: 22px;
-        top: 155px;
+        top: 108px;
     }
     .dropdown_acc{
         position: absolute;
@@ -707,8 +730,8 @@ input[type="datetime-local"]{
 
     }
     .nav_l div{
-        padding: 10px 0;
-
+        padding: 0 0;
+        z-index: 10;
     }
     .nav{
         display: flex;
@@ -725,6 +748,9 @@ input[type="datetime-local"]{
     }
     .content_task{
         width: 80vw !important;
+    }
+    .content_task img{
+        border-radius: 0!important;
     }
     #ajax{
         text-align: initial;
@@ -755,17 +781,10 @@ input[type="datetime-local"]{
         position: absolute;
         right:  -36%;
         margin-top: 10vh!important;
-        z-index:10;
+        z-index:8;
     }
     .badget_intro{
-        margin-top: -15px;
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        color: white;
-        left:11vw;
-        top: 12vh;
-        margin-top: 5.2vh;
+        display: none;
     }
     .content_task {
         text-align: center;
@@ -774,8 +793,37 @@ input[type="datetime-local"]{
         color: black;
         width: 30vw;
         height: fit-content;
-        background: linear-gradient(whitesmoke, rgb(205, 255, 255)) no-repeat;
+        background: #ebecf0;
         border-radius: 5px;
+    }
+    .search_status_laptop{
+        display: none;
+    }
+    .search_status_mobile{
+        display: block;
+
+        /* width: 100%; */
+        /*position: absolute;*/
+        /*left: 10vw;*/
+    }
+    .search input{
+        width: 50vw!important;
+    }
+    .search, .search_status_mobile{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        right: 4%;
+        margin-top: 10vh!important;
+        z-index: 8;
+    }
+    .search_status_mobile{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        right: 12%;
+        margin-top: 16.5vh!important;
+        z-index: 8;
     }
     .content_task  p{
         width: 100%;
@@ -791,7 +839,7 @@ input[type="datetime-local"]{
         animation-name: col;
         animation-duration: 2s;
         animation-iteration-count: infinite;
-        z-index: 10;
+        z-index: 8;
         position: absolute;
         top: 18px;
         left: calc(100% - 175px);
@@ -816,5 +864,45 @@ input[type="datetime-local"]{
     .tasks{
         margin-top: 10vh;
     }
-}
 
+    .progress {
+        margin: 10px 0;
+        width: 20px;
+        border-radius: 0;
+    }
+    .nav{
+        background: transparent!important;
+    }
+    .accordion-item{
+        width: fit-content!important;
+        margin: 0 auto!important;
+
+    }
+    .xx_taskingroup{
+        padding: 0 !important;
+    }
+    .col-md-12{
+        padding: 0!important;
+    }
+    .footer-bottom {
+        display: flex;
+        justify-content: space-around;
+        background: rgb(29, 66, 67);
+        width: 100vw;
+        padding: 20px 5px 10px 5px!important;
+        text-align: center;
+    }
+    .gg_login{
+        background: #f64f4f!important;
+
+    }
+    .contain_add{
+        width: initial!important;
+        padding: 100px 0;
+    }
+}
+/*btn-search*/
+.gg_login, btn-block{
+    background: #f64f4f!important;
+
+}
