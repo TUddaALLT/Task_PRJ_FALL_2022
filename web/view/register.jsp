@@ -33,11 +33,11 @@
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-5">
                                         <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-                                        <form action="./sendotp" method="get">
+                                        <form action="./sendotp" method="get" class="checkGmailIsValid">
                                             <div style="display: flex" class="form-outline mb-3">
-                                                <input placeholder="Your email" value="${sessionScope.email}" type="email" name="username" required=""  class=" form-control form-control-lg" />
+                                                <input  placeholder="Your email" value="${sessionScope.email}" type="email" name="username" required=""  class="GmailIsValid form-control form-control-lg" />
                                                 <div class="d-flex justify-content-center">
-                                                    <input type="submit" class="gg_login btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Send OTP"/>
+                                                    <input onclick="checkGmailSMTP()" type="submit" class="gg_login btn btn-success btn-block btn-lg gradient-custom-4 text-body" value="Send OTP"/>
                                                 </div>
                                             </div>
                                         </form>
@@ -55,7 +55,7 @@
                                                 <input placeholder="Repeat your password" type="password" required="" name="confirm_password" class="form-control form-control-lg" />
 
                                             </div>
-                                            <h4 class="text-uppercase text-center mb-5" style="color: red">${requestScope.mess_er}</h4>
+                                            <h4 class="text-uppercase text-center mb-5 isNotValid" style="color: red">${requestScope.mess_er}</h4>
                                             <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.mess}</h4>
                                             <h4 class="text-uppercase text-center mb-5" style="color: blue">${requestScope.connection}</h4>
                                             <div class="d-flex justify-content-center">
@@ -80,6 +80,8 @@
         <script
             src="./js/main.js"
         ></script>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            
     </body>
 </html>
 

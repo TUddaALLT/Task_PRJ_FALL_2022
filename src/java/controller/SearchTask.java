@@ -142,7 +142,7 @@ public class SearchTask extends HttpServlet {
             if ((listTask.getGroupID() == 0) || (listTask.getUsername().equals(username))) {
                 update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Update Task\" class=\"btn btn-primary   \"><i class=\"fa-solid fa-pen-nib\"></i></a>";
                 delete = "<div data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete Task\" class=\"btn btn-danger \">\n"
-                        + "<i onclick=\"deleteTask('" + listTask.getId() + "','" + listTask.getDescribe() + "')\" class=\"fa-solid fa-trash \"></i> \n"
+                        + "<i onclick=\"deleteTask('" + listTask.getId() +  "')\" class=\"fa-solid fa-trash \"></i> \n"
                         + "                                        </div>"
                         + "\n";
             }
@@ -154,7 +154,7 @@ public class SearchTask extends HttpServlet {
                     + "</div>\n"
                     + "                                <div class=\"card-body\">\n"
                     + status + task
-                    + "                                <div style=\"padding-bottom: 15px\"><i style=\"font-size: 30px;margin-right: 10px ;color:  #ef7575\" class=\"fa-solid fa-book\"></i>  " + listTask.getDescribe() + "</div> \n"
+                    + "                                <div style=\"padding-bottom: 15px\">  " + listTask.getDescribe() + "</div> \n"
                     + "                                <div class=\"trash\">\n"
                     + "\n"
                     + update + delete

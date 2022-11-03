@@ -25,12 +25,12 @@ public class DeleteTask extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String raw_id = request.getParameter("id");
-        String des = request.getParameter("describe");
+       
         int id;
         try {
             id = Integer.parseInt(raw_id);
-            TaskDAO taskDAO = new TaskDAO(); 
-            Utils.notification(request, "You have deleted task " + id + " " + des, "Delete Task");
+            TaskDAO taskDAO = new TaskDAO();
+            Utils.notification(request, "You have deleted one task " + id + " " , "Delete Task");
             taskDAO.deleteTask(id);
             response.sendRedirect("home");
         } catch (NumberFormatException e) {

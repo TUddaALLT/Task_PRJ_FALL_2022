@@ -49,22 +49,17 @@ public class Add extends BaseRequiredAuthentication {
         //   save file anh
         String raw_groupID = request.getParameter("groupID");
         String raw_status = request.getParameter("status");
-
         String time = request.getParameter("alarmTime");
-
         int status, groupID;
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String time_maked = dateFormat.format(date).toString();
-
         TaskDAO taskDAO = new TaskDAO();
-
         try {
             groupID = Integer.parseInt(raw_groupID);
             status = Integer.parseInt(raw_status);
             Task t;
-            t = new Task(img, describe, status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
+            t = new Task(img, describe.trim(), status, Utils.getAccountLogin(request).getUsername(), groupID, time_maked, time);
             taskDAO.addTask(t);
             // notification
             String des = "";

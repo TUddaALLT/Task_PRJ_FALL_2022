@@ -34,16 +34,8 @@ public class Home extends BaseRequiredAuthentication {
                 }
             }
         }
-        HttpSession session = request.getSession();
-        ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
-
-        String time = "";
-        String des = "";
-
         String t = taskDAO.getTaskSuccess(Utils.getAccountLogin(request).getUsername());
-
         String x[] = t.split(" ");
-
         ArrayList<Integer> dones = new ArrayList<>();
         dones.add(Integer.MAX_VALUE);
         for (String string : x) {
@@ -51,19 +43,8 @@ public class Home extends BaseRequiredAuthentication {
                 dones.add(Integer.parseInt(string));
             }
         }
-
         request.setAttribute("dones", dones);
-        for (Task task : listTasksNoti) {
-            time = time + " " + task.getTime_exc();
-            des = des + "*" + task.getDescribe();
 
-        }
-        if (des.length() > 1) {
-            des = des.substring(1);
-        }
-
-        session.setAttribute("des", des);
-        session.setAttribute("time", time.trim());
         request.setAttribute("tasks", taskDAO.getTop2Tasks(username));
         request.getRequestDispatcher("./view/home.jsp").forward(request, response);
     }
@@ -81,18 +62,6 @@ public class Home extends BaseRequiredAuthentication {
                 }
             }
         }
-        HttpSession session = request.getSession();
-
-        ArrayList<Task> listTasksNoti = taskDAO.getTasks(username);
-        String time = "";
-        String des = "";
-        for (Task task : listTasksNoti) {
-            time = time + " " + task.getTime_exc();
-            des = des + "*" + task.getDescribe();
-        }
-        session.setAttribute("time", time);
-        des = des.substring(1);
-        session.setAttribute("des", des);
         int number;
         try {
             String raw_num = request.getParameter("ex");
@@ -100,7 +69,6 @@ public class Home extends BaseRequiredAuthentication {
         } catch (Exception e) {
             number = 1;
         }
-
         PrintWriter out = response.getWriter();
 
         ArrayList<Task> listTasks = taskDAO.getTop2NextTasks(username, number);
@@ -115,7 +83,6 @@ public class Home extends BaseRequiredAuthentication {
             request.setAttribute("dones", dones);
         } catch (Exception e) {
         }
-
         for (Task listTask : listTasks) {
             String status = "";
             switch (listTask.getStatus()) {
@@ -170,7 +137,7 @@ public class Home extends BaseRequiredAuthentication {
             if ((listTask.getGroupID() == 0) || (listTask.getUsername().equals(username))) {
                 update = "   <a onclick=\"updateTask('" + listTask.getId() + "')\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Update Task\" class=\"btn btn-primary   \"><i class=\"fa-solid fa-pen-nib\"></i></a>";
                 delete = "<div data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Delete Task\" class=\"btn btn-danger \">\n"
-                        + "<i onclick=\"deleteTask('" + listTask.getId() + "','" + listTask.getDescribe() + "')\" class=\"fa-solid fa-trash \"></i> \n"
+                        + "<i onclick=\"deleteTask('" + listTask.getId() + "')\" class=\"fa-solid fa-trash \"></i> \n"
                         + "                                        </div>"
                         + "\n";
             }
@@ -182,7 +149,7 @@ public class Home extends BaseRequiredAuthentication {
                     + "</div>\n"
                     + "                                <div class=\"card-body\">\n"
                     + status + task
-                    + "                                 <div style=\"padding-bottom: 15px\"><i style=\"font-size: 30px;margin-right: 10px ;color:  #ef7575\" class=\"fa-solid fa-book\"></i>  " + listTask.getDescribe() + "</div>  "
+                    + "                                 <div style=\"padding-bottom: 15px\">   " + listTask.getDescribe() + "</div>  "
                     + "                                <div class=\"trash\">\n"
                     + "\n"
                     + update + delete

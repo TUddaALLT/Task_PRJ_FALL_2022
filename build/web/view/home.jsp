@@ -37,9 +37,10 @@
             margin: 0;
         }
         #particles-js {
-          background: 
-              url("https://haycafe.vn/wp-content/uploads/2021/12/Hinh-anh-dep-Powerpoint.png")
-          bottom no-repeat transparent;    background-size: cover;
+            background:
+                url("https://haycafe.vn/wp-content/uploads/2021/12/Hinh-anh-dep-Powerpoint.png")
+                bottom no-repeat transparent;
+            background-size: cover;
             position: fixed;
             width: 100%;
             height: 100%;
@@ -51,7 +52,7 @@
         }
     </style>
 </head>
-<body onload="setAlarm('${sessionScope.time}', '${sessionScope.des}')">
+<body>
     <main id="principal">
         <jsp:include page="header.jsp" /> 
         <div class="hr1"></div>
@@ -71,43 +72,43 @@
                    right: 35px;" class="fas fa-search"></i>
 
             </div>
-              <div class="adder" style=" margin-top: 20px;
-             display: flex;
-             justify-content: center;
-             ">
-            <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Task"  href="./add" role="button"><i class="fa-solid fa-plus"></i></a>
-        </div>
-        <div class="search_status_laptop" >
-            <div class="btn-group-vertical">
-                <span style="width: 100%; margin-bottom: 10px ;padding: 8px 0"  class="badge rounded-pill bg-info text-dark">Status</span>
-                <button type="button" onclick="search('', 3)" class="btn btn-danger">Start</button>
-                <button type="button" onclick="search('', 1)" class="btn btn-warning">Going</button>
-                <button type="button" onclick="search('', 2)" style="background: green" class="btn">End</button>
-                <button  type="button" class="btn btn-primary" onclick="sort()">
-                    New
-                </button>
+            <div class="adder" style=" margin-top: 20px;
+                 display: flex;
+                 justify-content: center;
+                 ">
+                <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Task"  href="./add" role="button"><i class="fa-solid fa-plus"></i></a>
             </div>
-        </div>
-        <div class="search_status_mobile">
-            <div class="btn-group  " role="group" aria-label="...">
-                <button type="button" onclick="search('', 3)" class="btn btn-danger btn_mobile">Start</button>
-                <button type="button" onclick="search('', 1)" class="btn btn-warning btn_mobile">Going</button>
-                <button type="button" onclick="search('', 2)" style="background: green" class="btn btn_mobile">End</button>
-                 <button  type="button" class="btn btn-primary" onclick="sort()">
-                    New
-                </button>
+            <div class="search_status_laptop" >
+                <div class="btn-group-vertical">
+                    <span style="width: 100%; margin-bottom: 10px ;padding: 8px 0"  class="badge rounded-pill bg-info text-dark">Status</span>
+                    <button type="button" onclick="search('', 3)" class="btn btn-danger">Start</button>
+                    <button type="button" onclick="search('', 1)" class="btn btn-warning">Going</button>
+                    <button type="button" onclick="search('', 2)" style="background: green" class="btn">End</button>
+                    <button  type="button" class="btn btn-primary" onclick="sort()">
+                        New
+                    </button>
+                </div>
             </div>
-        </div>
+            <div class="search_status_mobile">
+                <div class="btn-group  " role="group" aria-label="...">
+                    <button type="button" onclick="search('', 3)" class="btn btn-danger btn_mobile">Start</button>
+                    <button type="button" onclick="search('', 1)" class="btn btn-warning btn_mobile">Going</button>
+                    <button type="button" onclick="search('', 2)" style="background: green" class="btn btn_mobile">End</button>
+                    <button  type="button" class="btn btn-primary" onclick="sort()">
+                        New
+                    </button>
+                </div>
+            </div>
 
-        <div class="badget_intro">
-            <h3 style="background: rgb(34,193,195);
-                background: white;
-                padding: 2px 10px;
-                color: #3d99ce;
-                border-radius: 5px;">Table Project </h3> 
-        </div>
+            <div class="badget_intro">
+                <h3 style="background: rgb(34,193,195);
+                    background: white;
+                    padding: 2px 10px;
+                    color: #3d99ce;
+                    border-radius: 5px;">Table Project </h3> 
+            </div>
         </c:if>
-      
+
 
         <div class="tasks" style="padding: 60px 10% 75vh 10%; ">
             <div id="ajax" class="contain_card"> 
@@ -146,44 +147,43 @@
                                                 <c:if test = "${t.groupID == 0}">
                                                     <i style="color: #785ccd;font-size: 20px;" class="fa-solid fa-user"></i>
                                                 </c:if> 
-                                                <div style="padding-bottom: 15px"><i style="font-size: 30px;margin-right: 10px ;color:  #ef7575" class="fa-solid fa-book"></i>   ${t.describe}</div>  
+                                                <div style="padding-bottom: 15px">
+                                                    <!--<i style="font-size: 30px;margin-right: 10px ;color:  #ef7575" class="fa-solid fa-book"></i>-->  
+                                                    <span class="c">
+                                                        ${t.describe}
+                                                    </span>  
+
+                                                </div>  
                                                 <div class="trash">
                                                     <c:if test = "${t.groupID != 0 and !(t.username eq sessionScope.login.username)}">
                                                         <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not update">   <a onclick="updateTask('${t.id}')" 
                                                                                                                                                              class="btn btn-primary disabled "
 
-                                                                                                                                                             ><i class="fa-solid fa-pen-nib"></i></a> </span>
+                                                                                                       ><i class="fa-solid fa-pen-nib"></i></a> </span>
                                                             </c:if>  
                                                             <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
                                                         <a onclick="updateTask('${t.id}')" class="btn btn-primary "   data-bs-toggle="tooltip" data-bs-placement="top" title="Update Task" ><i class="fa-solid fa-pen-nib"></i></a>
                                                         </c:if> 
-
-
                                                     <c:set var = "check" scope = "session" value = "0"/>
                                                     <c:if test = "${t.groupID != 0 and !(t.username eq sessionScope.login.username)}">
                                                         <c:forEach items="${requestScope.dones}" var="d">
                                                             <c:if test = "${t.id == d}">
                                                                 <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Task have been completed"> <a onclick="doneTask(this, '${t.id}', '${t.groupID}', '${t.username}')"    class="btn btn-success done_task disabled" ><i class="fa-solid fa-check"></i></a>
                                                                     <c:set var = "check" scope = "session" value = "1"/> </span>
-
                                                             </c:if>
                                                         </c:forEach>
                                                         <c:if test = "${sessionScope.check ==0}">
                                                             <a onclick="doneTask(this, '${t.id}', '${t.groupID}', '${t.username}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Complete Task" class="btn btn-success done_task "><i class="fa-solid fa-check"></i></a>
                                                             </c:if>
                                                         </c:if>
-
-
-
-
                                                     <c:if test = "${t.groupID != 0 and !(t.username eq sessionScope.login.username)}">
                                                         <span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="You can not delete"> <a class="btn btn-danger disabled">
-                                                                <i onclick="deleteTask('${t.id}', '${t.describe}')" class="fa-solid fa-trash "></i> 
+                                                                <i onclick="deleteTask('${t.id}')" class="fa-solid fa-trash "></i> 
                                                             </a> </span>
                                                         </c:if>   
                                                         <c:if test = "${t.groupID == 0 or  t.username eq sessionScope.login.username}">
                                                         <div class="btn btn-danger">
-                                                            <i onclick="deleteTask('${t.id}', '${t.describe}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Task" class="fa-solid fa-trash "></i> 
+                                                            <i onclick="deleteTask('${t.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Task" class="fa-solid fa-trash "></i> 
                                                         </div>
                                                     </c:if> 
                                                 </div>

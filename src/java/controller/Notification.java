@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Notification extends HttpServlet {
 
-    static int num = 100;
+    static int num = Integer.MAX_VALUE;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,6 @@ public class Notification extends HttpServlet {
             out.println("error");
         }
         num = notificationDAO.countNotification(Utils.getAccountLogin(request).getUsername());
-       
     }
 
     @Override

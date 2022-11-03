@@ -23,7 +23,9 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             />
         <link
-        <link rel="stylesheet" href="./css/main.css" />
+
+
+            <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./js/main.js" />
     </head>
     <body>
@@ -52,12 +54,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Image</label>
-                    <input name="img" required=""  class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
-
+                    <input onchange="loadFile(event)" name="img" required=""  class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+                    <img style="width:40vw; margin-top:10px;border-radius: 10px" id="output"/>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Describe</label>        
-                    <textarea   name="describe"  rows="8"  class="form-control" type="text"  aria-label="default input example">${requestScope.task.describe}</textarea>
+                    <textarea   name="describe"  rows="8"  id="content_editor" class="form-control content_editor" type="text"  aria-label="default input example">${requestScope.task.describe}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Time Expired</label>  
@@ -68,6 +70,13 @@
             </form>
         </div>
         <jsp:include page="footer.jsp" /> 
+        <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+        <script>
+                        var editor = '';
+                        $(document).ready(function () {
+                            editor = CKEDITOR.replace('content_editor');
+                        });
+        </script>
         <script
             src="https://kit.fontawesome.com/3a6c73e27c.js"
             crossorigin="anonymous"

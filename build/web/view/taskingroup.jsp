@@ -43,7 +43,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne${loop.index}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne${loop.index}">
-                                    <div style="padding: 10px 10px" class="badge rounded-pill bg-info text-dark"> ID:${t.id}  |  Describe: ${t.describe}  </div>
+                                    <div style="padding: 18px 10px 0 10px ; display: flex;justify-content: center" class="badge rounded-pill bg-info text-dark"> ID:${t.id}  |  Describe: ${t.describe}  </div>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne${loop.index}" class="accordion-collapse collapse  " aria-labelledby="headingTwo">

@@ -25,13 +25,15 @@
         <link
             <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./js/main.js" />
+        <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+
         <style>
             * {
                 margin: 0;
             }
             #particles-js {
-/*                background: url("https://marcbruederlin.github.io/particles.js/img/background.jpg")
-                    bottom no-repeat transparent;*/
+                /*                background: url("https://marcbruederlin.github.io/particles.js/img/background.jpg")
+                                    bottom no-repeat transparent;*/
                 background-size: cover;
                 position: fixed;
                 width: 100%;
@@ -71,13 +73,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Image</label>
-                        <input onchange="loadFile(event)" name="img" required="" class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
+                        <input onchange="loadFile(event)" name="img" required=""  class="form-control" type="file"  accept="image/png, image/gif, image/jpeg" aria-label="default input example">
                         <img style="width:40vw; margin-top:10px;border-radius: 10px" id="output"/>
 
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Describe</label>        
-                        <textarea name="describe"  rows="8"  required="" class="form-control" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
+                        <textarea name="describe"  rows="8"  required="" id="content_editor" class="form-control content_editor" type="text" placeholder="Enter Describe" aria-label="default input example"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Time Expired    </label>  
@@ -96,117 +98,124 @@
         <div id="particles-js"></div>
         <script src="./js/particles.min.js"></script>
         <script>
-                            particlesJS({
-                                particles: {
-                                    number: {
-                                        value: 85,
-                                        density: {
-                                            enable: true,
-                                            value_area: 800,
-                                        },
-                                    },
-                                    color: {
-                                        value: "#ffffff",
-                                    },
-                                    shape: {
-                                        type: "circle",
-                                        stroke: {
-                                            width: 0,
-                                            color: "#000000",
-                                        },
-                                        polygon: {
-                                            nb_sides: 5,
-                                        },
-                                        image: {
-                                            src: "img/github.svg",
-                                            width: 100,
-                                            height: 100,
-                                        },
-                                    },
-                                    opacity: {
-                                        value: 0.5,
-                                        random: false,
-                                        anim: {
-                                            enable: false,
-                                            speed: 1,
-                                            opacity_min: 0.1,
-                                            sync: false,
-                                        },
-                                    },
-                                    size: {
-                                        value: 3,
-                                        random: true,
-                                        anim: {
-                                            enable: false,
-                                            speed: 20,
-                                            size_min: 0.1,
-                                            sync: false,
-                                        },
-                                    },
-                                    line_linked: {
-                                        enable: true,
-                                        distance: 150,
-                                        color: "#ffffff",
-                                        opacity: 0.4,
-                                        width: 1,
-                                    },
-                                    move: {
-                                        enable: true,
-                                        speed: 2.22388442605866,
-                                        direction: "none",
-                                        random: false,
-                                        straight: false,
-                                        out_mode: "out",
-                                        bounce: false,
-                                        attract: {
-                                            enable: false,
-                                            rotateX: 600,
-                                            rotateY: 1200,
-                                        },
-                                    },
-                                },
-                                interactivity: {
-                                    detect_on: "canvas",
-                                    events: {
-                                        onhover: {
-                                            enable: false,
-                                            mode: "repulse",
-                                        },
-                                        onclick: {
-                                            enable: true,
-                                            mode: "push",
-                                        },
-                                        resize: true,
-                                    },
-                                    modes: {
-                                        grab: {
-                                            distance: 400,
-                                            line_linked: {
-                                                opacity: 1,
-                                            },
-                                        },
-                                        bubble: {
-                                            distance: 400,
-                                            size: 40,
-                                            duration: 2,
-                                            opacity: 8,
-                                            speed: 1,
-                                        },
-                                        repulse: {
-                                            distance: 200,
-                                            duration: 0.9,
-                                        },
-                                        push: {
-                                            particles_nb: 4,
-                                        },
-                                        remove: {
-                                            particles_nb: 2,
-                                        },
-                                    },
-                                },
-                                retina_detect: true,
+                            var editor = '';
+                            $(document).ready(function () {
+                                editor = CKEDITOR.replace('content_editor');
                             });
         </script>
+        <script>
+            particlesJS({
+                particles: {
+                    number: {
+                        value: 85,
+                        density: {
+                            enable: true,
+                            value_area: 800,
+                        },
+                    },
+                    color: {
+                        value: "#ffffff",
+                    },
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000",
+                        },
+                        polygon: {
+                            nb_sides: 5,
+                        },
+                        image: {
+                            src: "img/github.svg",
+                            width: 100,
+                            height: 100,
+                        },
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: {
+                            enable: false,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: false,
+                            speed: 20,
+                            size_min: 0.1,
+                            sync: false,
+                        },
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        width: 1,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2.22388442605866,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: {
+                            enable: false,
+                            rotateX: 600,
+                            rotateY: 1200,
+                        },
+                    },
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: false,
+                            mode: "repulse",
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push",
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        grab: {
+                            distance: 400,
+                            line_linked: {
+                                opacity: 1,
+                            },
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 1,
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.9,
+                        },
+                        push: {
+                            particles_nb: 4,
+                        },
+                        remove: {
+                            particles_nb: 2,
+                        },
+                    },
+                },
+                retina_detect: true,
+            });
+        </script>
+      
     </body>
 </html>
 

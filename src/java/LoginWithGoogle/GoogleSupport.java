@@ -26,6 +26,7 @@ public class GoogleSupport {
         String link = Constant.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
         GoogleDTO user = new Gson().fromJson(response, GoogleDTO.class);
+        System.out.println(user);
         return user;
     }
 

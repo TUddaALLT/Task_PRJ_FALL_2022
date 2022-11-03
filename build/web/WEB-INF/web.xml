@@ -34,19 +34,19 @@
     </servlet>
     <servlet>
         <servlet-name>CreateGroup</servlet-name>
-        <servlet-class>controller.CreateGroup</servlet-class>
+        <servlet-class>controller_group.CreateGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterGroup</servlet-name>
-        <servlet-class>controller.RegisterGroup</servlet-class>
+        <servlet-class>controller_group.RegisterGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MyGroup</servlet-name>
-        <servlet-class>controller.MyGroup</servlet-class>
+        <servlet-class>controller_group.MyGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GroupCreated</servlet-name>
-        <servlet-class>controller.GroupCreated</servlet-class>
+        <servlet-class>controller_group.GroupCreated</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AssignTask</servlet-name>
@@ -78,19 +78,19 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteGroup</servlet-name>
-        <servlet-class>controller.DeleteGroup</servlet-class>
+        <servlet-class>controller_group.DeleteGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OutGroup</servlet-name>
-        <servlet-class>controller.OutGroup</servlet-class>
+        <servlet-class>controller_group.OutGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TaskSuccess</servlet-name>
-        <servlet-class>controller.TaskSuccess</servlet-class>
+        <servlet-class>controller_group.TaskSuccess</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TaskInGroup</servlet-name>
-        <servlet-class>controller.TaskInGroup</servlet-class>
+        <servlet-class>controller_group.TaskInGroup</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SortTask</servlet-name>
@@ -98,7 +98,11 @@
     </servlet>
     <servlet>
         <servlet-name>KickMember</servlet-name>
-        <servlet-class>controller.KickMember</servlet-class>
+        <servlet-class>controller_group.KickMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TaskExpired</servlet-name>
+        <servlet-class>controller.TaskExpired</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>KickMember</servlet-name>
         <url-pattern>/kickmember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaskExpired</servlet-name>
+        <url-pattern>/taskexpired</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -53,7 +53,8 @@ public class Login extends HttpServlet {
         } catch (ServletException | IOException e) {
             request.getRequestDispatcher("./view/login.jsp").forward(request, response);
         }
-        response.sendRedirect("home");
+        request.getRequestDispatcher("./view/start.jsp").forward(request, response);
+
     }
 
     @Override
@@ -68,7 +69,7 @@ public class Login extends HttpServlet {
             Cookie usernameCookie = new Cookie("usernameCookie", username);
             response.addCookie(usernameCookie);
             session.setAttribute("login", new Account(username, password, accountDAO.login(username, password).getRole()));
-            response.sendRedirect("home");
+            request.getRequestDispatcher("./view/start.jsp").forward(request, response);
         } else {
             session.setAttribute("login", null);
             request.setAttribute("mess_er", "Username or Password is wrong!!");

@@ -23,7 +23,6 @@
     </head>
     <body>
         <jsp:include page="header.jsp" /> 
-
         <div  > 
             <section class="vh-100 bg-image">
                 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -33,7 +32,7 @@
                                 <div class="card" style="border-radius: 15px;">
                                     <div class="card-body p-5">
                                         <h2 class="text-uppercase text-center mb-5">Login Account</h2>
-                                        <form action="./login" method="post">
+                                        <form action="./login" method="post" id="form">
                                             <div class="form-outline mb-3">
                                                 <input   type="email" name="username" required=""  class=" form-control form-control-lg" />
                                                 <label class="form-label" for="form3Example3cg">Your Email</label>
@@ -43,11 +42,20 @@
                                                 <label class="form-label" for="form3Example4cg">Password</label>
                                             </div> 
                                             <h4 class="text-uppercase text-center mb-5" style="color: red">${requestScope.mess_er}</h4>
+                                            <!--captcha-->
+                                            <div style="margin-bottom: 10px" class="d-flex justify-content-center">
+                                                <div  class="g-recaptcha" data-sitekey="6LcN9dEiAAAAAI1cjh4ox4tSaH3nov884_13fHDJ"></div>
+                                            </div>
+                                            <div style="margin-bottom: 10px" class="d-flex justify-content-center">
+                                                <div style="color: red" class="captcha"></div>
+                                            </div>
+                                            <!--captcha-->
                                             <div style="width: 100%" class="d-flex justify-content-center">
                                                 <input style="width: 100%" type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body" value="Login"/>
                                             </div>
                                             <div style="width: 100% ;  margin-top: 3em" class="d-flex justify-content-center ">
-                                                <a style="width: 100%; " class="btn btn-danger btn-block gg_login btn-lg gradient-custom-4 text-body" href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:9999/Tasks/login&response_type=code
+                                                <a style="width: 100%; " class="btn btn-danger btn-block gg_login btn-lg gradient-custom-4 text-body" 
+                                                   href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:9999/Tasks/login&response_type=code
                                                    &client_id=641835329293-5dv586l39j3om29fo4ekshqed1hb2td2.apps.googleusercontent.com&approval_prompt=force">
                                                     <span style="    margin-right: 20px;
                                                           "><i class="fa-brands fa-google"></i> </span>
@@ -72,6 +80,21 @@
         <script
             src="./js/main.js"
         ></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+            window.onload = function () {
+                const form = document.querySelector("#form");
+                form.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const response = grecaptcha.getResponse();
+                    if (response) {
+                        form.submit();
+                    } else {
+                        document.querySelector(".captcha").innerHTML = "Check Captcha";
+                    }
+                })
+            }
+        </script>
     </body>
 </html>
 

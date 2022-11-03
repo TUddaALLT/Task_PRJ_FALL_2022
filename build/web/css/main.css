@@ -384,7 +384,7 @@ a{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 80vh;
     overflow: auto;
-    z-index: 10;
+    z-index: 9;
 
 }
 .alert-simple.alert-primary
@@ -493,7 +493,7 @@ a{
     animation-name: col;
     animation-duration: 2s;
     animation-iteration-count: infinite;
-    z-index: 10;
+    z-index: 9;
     position: absolute;
     top: 8px;
     left: 88%;
@@ -684,7 +684,7 @@ input[type="datetime-local"]{
         padding: 24px;
         /* margin: auto; */
         display: inline;
-        z-index: 10;
+        z-index: 9;
         background: #a52a2a;
         width: 137px;
         border-radius: 7px;
@@ -731,7 +731,7 @@ input[type="datetime-local"]{
     }
     .nav_l div{
         padding: 0 0;
-        z-index: 10;
+        z-index: 9;
     }
     .nav{
         display: flex;
@@ -856,7 +856,7 @@ input[type="datetime-local"]{
         box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
         height: 80vh;
         overflow: auto;
-        z-index: 10;
+        z-index: 9;
         left: calc(100% - 400px);
         top: -40vh;
 
@@ -900,9 +900,17 @@ input[type="datetime-local"]{
         width: initial!important;
         padding: 100px 0;
     }
+   
 }
 /*btn-search*/
 .gg_login, btn-block{
     background: #f64f4f!important;
 
+}
+.btn-danger{
+    z-index: 10;
+}
+p.c {
+  width: 200px!important;
+  word-break: break-all!important;
 }

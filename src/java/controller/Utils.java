@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties; 
+import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -66,7 +66,7 @@ public class Utils {
 //                    request.setAttribute("connection", "Mail is not exist");
             }
             message.setSubject("Hello " + to);
-            message.setText(from + " Assign you a task " + des.toUpperCase() + ",please go to website to check it");
+            message.setText(from + " Assign you a task. " + "Please go to website to check it");
             // send message
             Transport.send(message);
             System.out.println("ooo");

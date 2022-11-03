@@ -70,7 +70,7 @@ function loadMoreSort() {
     }, 1000);
 
 }
-function deleteTask(id, describe) {
+function deleteTask(id) {
     swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -81,7 +81,7 @@ function deleteTask(id, describe) {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    window.location = "./deletetask?id=" + id + "&describe=" + describe;
+                    window.location = "./deletetask?id=" + id;
                 } else {
                     swal("Your imaginary file is safe!");
                 }
@@ -156,6 +156,25 @@ function outGroup(id) {
             });
 }
 setInterval(notification, 1000);
+setInterval(expiredTask, 1000);
+function expiredTask() {
+    $.ajax({
+        url: "/Tasks/taskexpired",
+        type: "get",
+        data: {
+//            ex: ;
+        },
+        success: function (data) {
+            let x = data.split("+^");
+            let time = x[0].trim();
+            let des = x[1].trim();
+            setAlarm(time, des);
+        },
+        error: function (xhr) {
+            //Do Something to handle error
+        }
+    });
+}
 function updateTask(id) {
 
     swal({
@@ -205,7 +224,6 @@ let x = document.getElementById("username_text").offsetWidth + 180;
 document.querySelector(".nav_r").style.width = `${x}px`;
 function notification() {
 //    let amount = document.getElementsByClassName("card").length;
-
     $.ajax({
         url: "/Tasks/notification",
         type: "get",
@@ -229,7 +247,6 @@ function notification() {
             //Do Something to handle error
         }
     });
-
 }
 let n = 1;
 function getNotification() {
@@ -290,7 +307,6 @@ function setAlarm(time, des) {
     let time_ex = [];
     let des_ex = [];
     console.log(time);
-
     for (let i = 0; i < time.length; i++) {
         let current = new Date();
         let timeAlarm = new Date(time[i]);
@@ -304,14 +320,21 @@ function setAlarm(time, des) {
 //    time_ex.sort();
     console.log(time_ex);
     for (let i = 0; i < time_ex.length; i++) {
+        let re = des_ex[i]
         setTimeout(() => swal({
-                title: "Task is expired " + des_ex[i],
+                title: "Task is expired " + extractContent(des_ex[i]),
                 text: "You clicked the button!",
                 icon: "error",
                 button: "Ok "
             }), time_ex[i]);
     }
 }
+function extractContent(s) {
+    var span = document.createElement('span');
+    span.innerHTML = s;
+    return span.textContent || span.innerText;
+}
+;
 //preview img
 var loadFile = function (event) {
     var output = document.getElementById('output');
@@ -320,5 +343,45 @@ var loadFile = function (event) {
         URL.revokeObjectURL(output.src) // free memory
     }
 };
+let css = 0;
+function css_z_index() {
+    let w = window.innerWidth;
+    if (w < 650 && css === 0) {
+        document.querySelector('.search_status_mobile').style.display = 'none';
+        document.querySelector('.search').style.display = 'none';
+        css = 1;
+    } else if (w > 650 && css === 1) {
+        document.querySelector('.search_status_mobile').style.display = 'block';
+        document.querySelector('.search').style.display = 'initial';
+        css = 0;
+    }
+}
+function checkGmailSMTP() {
+    const form = document.querySelector(".checkGmailIsValid");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const email = document.querySelector(".GmailIsValid").value;
+        var myHeaders = new Headers();
+        myHeaders.append("apikey", "E736cUf36mgKoPFIUJbcbkBtYk4kHapk");
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow',
+            headers: myHeaders
+        };
+        fetch("https://api.apilayer.com/email_verification/check?email=" + email, requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const email = JSON.parse(result);
+                    if (email.smtp_check) {
+                        form.submit();
+                        document.querySelector(".isNotValid").innerHTML = "OTP is sent"
+                    } else {
+                        document.querySelector(".isNotValid").innerHTML = "Email is not existed to send OTP"
+                    }
+                })
+                .catch(error => console.log('error', error));
+    })
 
- 
+
+}

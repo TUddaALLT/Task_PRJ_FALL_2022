@@ -46,16 +46,17 @@
                                                         next page</li>
                                                 </ol>
                                             </div>
-                                            <form   action="forgotPassword" method="POST">
+                                            <form   action="forgotPassword" method="POST" class="checkGmailIsValid">
                                                 <div >
                                                     <div class="form-group">
                                                         <label for="email-for-pass">Enter your email address</label> 
-                                                        <input class="form-control" type="text" name="email" id="email-for-pass"  required="">
+                                                        <input    class="form-control GmailIsValid" type="text" name="email" id="email-for-pass"  required="">
                                                         <small class="form-text text-muted">Enter the registered email address . Then we'll
                                                             email a OTP to this address.</small>
+                                                         <h4 class="text-uppercase text-center mb-5 isNotValid" style="color: red"></h4>
                                                     </div>
                                                 </div>
-                                                <input  style="width: 100% ; margin: 20px 0" type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body" value="Get New Password"/>
+                                                <input  onclick="checkGmailSMTP()"  style="width: 100% ; margin: 20px 0" type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body" value="Get New Password"/>
                                             </form>
                                             <button style="width: 100%"  class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body">
                                                 <a   href="login" class=" text-body">Back To Login</a>

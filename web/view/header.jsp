@@ -68,7 +68,7 @@
 
                 <div><span style="color: white"   id="username_text">Welcome ${cookie['usernameCookie'].getValue()}</span></div>
                 <div class="dropdown dropdown_acc">
-                    <button style="color: white" class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button style="color: white" onclick="css_z_index()" class="btn btn-block outline dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
